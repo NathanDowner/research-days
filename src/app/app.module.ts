@@ -11,12 +11,17 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+//plugins
+import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
+import {QrscanPage} from "../pages/qrscan/qrscan";
+
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
     ContactPage,
     HomePage,
+    QrscanPage,
     TabsPage
   ],
   imports: [
@@ -29,11 +34,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
+    QrscanPage,
     TabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    QRScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -19,8 +19,15 @@ import { QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 export class QrscanPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private qrScanner: QRScanner) {
-    this.scanCode();
+    //this.scanCode();
   }
+
+
+
+
+
+
+  /**
 
   scanCode(){
     //camera permission request
@@ -28,16 +35,17 @@ export class QrscanPage {
       .then((status: QRScannerStatus) => {
         if (status.authorized){
           //camera permission granted
-          console.log("PERMISSION GRANTED HAHAHAHAH");
+          console.log("PERMISSION GRANTED");
+          //window.document.querySelector('ion-app').classList.add('transparentBody');
+
+          // show camera preview
+          this.qrScanner.show().then((status) => {
+            console.log("Preview visible");
+          });
 
           //begin scanning
           let scanSub = this.qrScanner.scan().subscribe((text: String) => {
             console.log("Scanned Something", text);
-
-            // show camera preview
-            this.qrScanner.show().then((status) => {
-              console.log("Preview visible");
-            });
 
             scanSub.unsubscribe(); // stop scanning
           });
@@ -55,6 +63,8 @@ export class QrscanPage {
       })
       .catch((e: any) => console.log("Theeee Error: ", e));
   }
+
+   **/
 
 
   ionViewDidLoad() {

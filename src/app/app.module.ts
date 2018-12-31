@@ -7,13 +7,14 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { QrscanPage } from "../pages/qrscan/qrscan";
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 //plugins
-import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
-import {QrscanPage} from "../pages/qrscan/qrscan";
+//import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import {QrscanPage} from "../pages/qrscan/qrscan";
   providers: [
     StatusBar,
     SplashScreen,
-    QRScanner,
+    //QRScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

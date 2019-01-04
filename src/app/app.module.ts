@@ -14,7 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 //plugins
-//import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
+import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    //QRScanner,
+    QRScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

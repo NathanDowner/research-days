@@ -1,7 +1,9 @@
 page-qrscan {
 
-  #canvas{
-    display: none;
-  }
-
+  background: transparent;
 }
+
+.cameraView{
+  background: transparent none !important;
+}
+

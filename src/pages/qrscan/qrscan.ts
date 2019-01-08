@@ -36,25 +36,38 @@ export class QrscanPage {
    * @returns void
    */
   scanCode(){
+    let back: number = 0;
+    let front: number = 1;
+
     //camera permission request
     this.qrScanner.prepare()
       .then((status: QRScannerStatus) => {
         if (status.authorized){
           //camera permission granted
           console.log("PERMISSION GRANTED");
-          //window.document.querySelector('ion-app').classList.add('transparentBody');
 
-          // show camera preview
-          this.qrScanner.show().then((status) => {
-            console.log("Preview visible");
-          });
+          // console.log("Showing? ", status.showing);
+          //
+          // console.log("Preview? ", status.previewing);
+
+          this.qrScanner.useCamera(back).then();  // Select camera to use (Default = back | 0 )
 
           //begin scanning
           let scanSub = this.qrScanner.scan().subscribe((text: String) => {
             console.log("Scanned Something", text);
 
+            // this.qrScanner.hide().then((status) => {
+            //   console.log("Preview Hidden ", status);
+            // });
+
+            // show camera preview
+            this.qrScanner.show().then((status) => {
+              console.log("Preview visible: ", status);
+            });
+
             scanSub.unsubscribe(); // stop scanning
           });
+
 
         }else if(status.denied){
           // camera permission was permanently denied
@@ -62,12 +75,43 @@ export class QrscanPage {
           // then they can grant the permission from there
           console.log("Permission denied PERM");
           this.qrScanner.openSettings();
+
         }else {
           // permission was denied, but not permanently. You can ask for permission again at a later time.
           console.log("PERM denied TEMP");
         }
       })
-      .catch((e: any) => console.log("Theeee Error: ", e));
+      .catch((e: any) => console.log("Error: ", e));
+  }
+
+  /**
+   *
+   * @param status
+   */
+  cameraView(status: boolean): void {
+    if(status){
+      window.document.querySelector('ion-app').classList.add('cameraView');
+    } else {
+      window.document.querySelector('ion-app').classList.remove('cameraView');
+    }
+  }
+
+  destroy(): void {
+
+  }
+
+
+  endCamera(): Boolean {
+    let canleave: Boolean = false;
+    this.qrScanner.destroy().then((status: QRScannerStatus) => {
+      canleave = true;
+      console.log("TEST");
+    })
+      .catch((e: any) => {
+        console.log("Error: ", e);
+      });
+
+    return canleave;
   }
 
 
@@ -76,7 +120,24 @@ export class QrscanPage {
   }
 
   ionViewDidEnter(){
+    console.log('ionViewDidEnter QrscanPage');
+    this.cameraView(true);
     this.scanCode();
   }
+
+  ionViewWillLeave(){
+
+    console.log('ionViewWillLeave QrscanPage');
+    this.qrScanner.destroy().then((s) => { console.log("DESTROY")}).catch((e) => { console.log("Error: ", e)});
+    // this.qrScanner = null;
+    //this.endCamera();
+    this.cameraView(false);
+  }
+
+  ionViewCanLeave(): Boolean {
+    console.log("ionViewCanLeave QrscanPage?");
+    return this.endCamera();
+  }
+
 
 }

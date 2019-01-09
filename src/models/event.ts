@@ -4,6 +4,7 @@ export interface Event {
   host: string;
   startTime: string;
   endTime: string;
+  imgSrc: string;
   venue: string;
   speaker: string;
   description: string;

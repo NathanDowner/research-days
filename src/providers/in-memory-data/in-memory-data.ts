@@ -5,7 +5,7 @@ import { Event } from "../../models/event";
 
 @Injectable()
 export class InMemoryDataProvider implements InMemoryDbService {
-  private MAX_EVENTS: number = 10;
+  private MAX_EVENTS: number = 15;
 
   createDb() {
     const events: Event[] = [];
@@ -17,6 +17,7 @@ export class InMemoryDataProvider implements InMemoryDbService {
         host: fake("{{company.companyName}}"),
         startTime: "11:00am",
         endTime: "11:00pm",
+        imgSrc: fake("{{image.imageUrl}}"),
         venue: fake("{{address.city}}"),
         speaker: fake("{{name.title}}. {{name.firstName}} {{name.lastName}}"),
         description: fake("{{lorem.paragraph}}"),

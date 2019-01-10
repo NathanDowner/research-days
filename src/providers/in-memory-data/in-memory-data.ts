@@ -16,6 +16,7 @@ export class InMemoryDataProvider implements InMemoryDbService {
         title: fake("{{name.title}}"),
         host: fake("{{company.companyName}}"),
         startTime: "11:00am",
+        day: Math.ceil(Math.random() * 3),
         endTime: "11:00pm",
         imgSrc: fake("{{image.imageUrl}}"),
         venue: fake("{{address.city}}"),

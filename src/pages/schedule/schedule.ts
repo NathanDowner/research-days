@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { EventsProvider } from "../../providers/events/events";
 import { Event } from "../../models/event";
+import { EventViewPage } from "../event-view/event-view";
 
 @Component({
   selector: "page-schedule",
@@ -11,12 +12,18 @@ export class SchedulePage implements OnInit {
   private events: Event[];
 
   constructor(
-    public navCtrl: NavController,
+    private navCtrl: NavController,
     private eventsProvider: EventsProvider
   ) {}
 
   ngOnInit(): void {
     this.getEvents();
+  }
+
+  showEventPage(event) {
+    this.navCtrl.push(EventViewPage, {
+      event: event
+    });
   }
 
   getEvents(): void {

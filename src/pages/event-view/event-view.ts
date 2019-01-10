@@ -11,15 +11,15 @@ export class EventViewPage {
   event: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.navParams.get('event');
+    this.event = this.navParams.get('event');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventViewPage');
   }
 
-  findOnMap() {
-    
+  findOnMap(coords) {
+
   }
 
 }

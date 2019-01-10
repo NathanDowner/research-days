@@ -15,11 +15,20 @@
 
 <ion-content padding>
   <div class="image">
-    <img src="{{event.ImgSrc}}" alt="">
+    <img src="{{ event.imgSrc }}" alt="">
     <ion-row>
-      <ion-col>{{ event.title }}</ion-col>
-      <ion-col>{{ event.startTime }} - {{ event.endTime }}</ion-col>
+      <ion-col>Title: {{ event.title }}</ion-col>
+      <ion-col class="time">Time: {{ event.startTime }} - {{ event.endTime }}</ion-col>
     </ion-row>
+    <h4>Speaker: {{ event.speaker }}</h4>
+    <ion-row>
+      <ion-col>Location: {{ event.venue }}</ion-col>
+      <ion-col>
+        <button ion-button outline round color="danger" (click)="findOnMap(event.location.coords)">Locate</button>
+      </ion-col>
+    </ion-row>
+    <h4>Details</h4>
+    <p>{{ event.description }}</p>
   </div>
 
 </ion-content>

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { tap, catchError } from "rxjs/operators";
+import { Event } from "../../models/Event";
 
 @Injectable()
 export class EventsProvider {
@@ -10,8 +11,8 @@ export class EventsProvider {
 
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<any[]> {
-    return this.http.get<any[]>(this.eventsUrl).pipe(
+  getEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(this.eventsUrl).pipe(
       tap(_ => console.log("Events fetched")),
       catchError(this.handleError<any[]>("getEvents", []))
     );

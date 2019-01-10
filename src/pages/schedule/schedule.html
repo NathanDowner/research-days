@@ -2,4 +2,19 @@
   <ion-navbar> <ion-title>Schedule</ion-title> </ion-navbar>
 </ion-header>
 
-<ion-content padding> </ion-content>
+<ion-content padding>
+  <ion-item
+    *ngFor="let event of events"
+    (click)="showEventPage(event)"
+    text-wrap
+    margin-bottom
+  >
+    <ion-thumbnail item-start> <img src="{{ event.imgSrc }}" /> </ion-thumbnail>
+    <h2>{{ event.title }}</h2>
+    <p><ion-icon name="compass"></ion-icon> {{ event.venue }}</p>
+    <p>
+      <ion-icon name="time"></ion-icon> {{ event.startTime }} -
+      {{ event.endTime }}
+    </p>
+  </ion-item>
+</ion-content>

@@ -8,6 +8,7 @@
 
   <ion-navbar>
     <ion-title>qrscanAng</ion-title>
+    {{ width }} {{height}}
   </ion-navbar>
 
 </ion-header>
@@ -16,8 +17,8 @@
 <ion-content padding>
   <qr-scanner
     [debug]="false"
-    [canvasWidth]="1080"
-    [canvasHeight]="720"
+    [canvasWidth]= width
+    [canvasHeight]= height
     [stopAfterScan]="true"
     [updateTime]="500" >
   </qr-scanner>

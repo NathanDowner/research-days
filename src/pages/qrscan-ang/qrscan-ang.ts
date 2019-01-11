@@ -18,13 +18,16 @@ import {QrScannerComponent} from "angular2-qrscanner";
 })
 export class QrscanAngPage {
 
+  width: String;
+  height: String;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   @ViewChild(QrScannerComponent) qrScannerComponent: QrScannerComponent ;
 
   prepare() {
-    this.qrScannerComponent.getMediaDevices().then(devices => {
+    this.qrScannerComponent.getMediaDevices().then(devices => {  // receive all user media devices
       console.log(devices);
       const videoDevices: MediaDeviceInfo[] = [];
       for (const device of devices) {
@@ -34,21 +37,25 @@ export class QrscanAngPage {
         }
       }
       if (videoDevices.length > 0){
-        let choosenDev;
+        let chosenDev;
         for (const dev of videoDevices){
           if (dev.label.toLowerCase().includes('back')){
-            choosenDev = dev;
+            chosenDev = dev;
             break;
           }
         }
-        alert(choosenDev);
-        if (choosenDev) {
-          this.qrScannerComponent.chooseCamera.next(choosenDev);
+        alert(chosenDev);
+        // choose camera device to be used
+        if (chosenDev) {
+          this.qrScannerComponent.chooseCamera.next(chosenDev);
         } else {
           this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
         }
       }
     });
+
+    this.width = innerWidth.toString();
+    this.height = innerHeight.toString();
 
     // this.qrScannerComponent.videoElement.setAttribute('playsinline', 'true')
 

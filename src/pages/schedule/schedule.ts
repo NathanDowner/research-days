@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { EventsProvider } from "../../providers/events/events";
 import { Event } from "../../models/event";
@@ -8,7 +8,7 @@ import { EventViewPage } from "../event-view/event-view";
   selector: "page-schedule",
   templateUrl: "schedule.html"
 })
-export class SchedulePage implements OnInit {
+export class SchedulePage {
   private events: Event[];
   filterEvents: Event[];
   private searchTerm: string;
@@ -18,7 +18,7 @@ export class SchedulePage implements OnInit {
     private eventsProvider: EventsProvider
   ) {}
 
-  ngOnInit(): void {
+  ionViewDidLoad(): void {
     this.getEvents();
   }
 

@@ -18,10 +18,15 @@ import { QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 })
 export class QrscanPage {
 
+  ionApp = document.getElementsByTagName("ion-app")[0];
+
   width: number = 320;  // resulting snapshot width
   height: number = 0;  // video input stream height (to be computed)
 
-  streaming: boolean = false; //Is there an active stream?
+  streaming: boolean = false;  // Is there an active stream?
+  destroyed: boolean = false;  // Is the scanning instance destroyed?
+
+  scanSub = null;
 
   video: HTMLVideoElement = null;  // reference to video input stream (<video> element)
   canvas: HTMLCanvasElement = null;  // reference to canvas used to store snapshots (<canvas> element)
@@ -52,20 +57,15 @@ export class QrscanPage {
 
           this.qrScanner.useCamera(back).then();  // Select camera to use (Default = back | 0 )
 
+          // this.showCam();  // Show camera preview
+
           //begin scanning
-          let scanSub = this.qrScanner.scan().subscribe((text: String) => {
+          this.scanSub = this.qrScanner.scan().subscribe((text: String) => {
             console.log("Scanned Something", text);
 
-            // this.qrScanner.hide().then((status) => {
-            //   console.log("Preview Hidden ", status);
-            // });
+            this.hideCam();  // hide camera preview
 
-            // show camera preview
-            this.qrScanner.show().then((status) => {
-              console.log("Preview visible: ", status);
-            });
-
-            scanSub.unsubscribe(); // stop scanning
+            this.scanSub.unsubscribe(); // stop scanning
           });
 
 
@@ -84,34 +84,55 @@ export class QrscanPage {
       .catch((e: any) => console.log("Error: ", e));
   }
 
+  showCam(): void {
+    // show camera preview
+    this.qrScanner.show().then((status) => {
+      console.log("Preview visible: ", status);
+    })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  }
+
+  hideCam (): void {
+    // hide camera preview
+    this.qrScanner.hide().then((status) => {
+      console.log("Preview Hidden ", status);
+    })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  }
+
   /**
    *
    * @param status
    */
   cameraView(status: boolean): void {
     if(status){
-      window.document.querySelector('ion-app').classList.add('cameraView');
+      this.ionApp.classList.add('cameraView');
+      // window.document.querySelector('ion-app').classList.add('cameraView');
     } else {
-      window.document.querySelector('ion-app').classList.remove('cameraView');
+      this.ionApp.classList.remove('cameraView');
+      // window.document.querySelector('ion-app').classList.remove('cameraView');
     }
   }
 
   destroy(): void {
+    this.scanSub.unsubscribe();
+    this.hideCam();
 
-  }
-
-
-  endCamera(): Boolean {
-    let canleave: Boolean = false;
+    // scanner instance destroyed using destroy()
     this.qrScanner.destroy().then((status: QRScannerStatus) => {
-      canleave = true;
-      console.log("TEST");
+      this.cameraView(false);
+      this.destroyed = true;
+      console.log("Destroyed, status: ", status);
     })
       .catch((e: any) => {
+        this.destroyed = false;
         console.log("Error: ", e);
       });
 
-    return canleave;
   }
 
 
@@ -128,15 +149,14 @@ export class QrscanPage {
   ionViewWillLeave(){
 
     console.log('ionViewWillLeave QrscanPage');
-    this.qrScanner.destroy().then((s) => { console.log("DESTROY")}).catch((e) => { console.log("Error: ", e)});
+    //this.qrScanner.destroy().then((s) => { console.log("DESTROY")}).catch((e) => { console.log("Error: ", e)});
     // this.qrScanner = null;
-    //this.endCamera();
-    this.cameraView(false);
+    this.destroy();
   }
 
   ionViewCanLeave(): Boolean {
     console.log("ionViewCanLeave QrscanPage?");
-    return this.endCamera();
+    return this.destroyed;
   }
 
 

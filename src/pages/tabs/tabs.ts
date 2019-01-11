@@ -4,6 +4,7 @@ import { MapPage } from "../map/map";
 import { SchedulePage } from "../schedule/schedule";
 import { QrReaderPage } from "../qr-reader/qr-reader";
 import { HomePage } from "../home/home";
+import {QrscanPage} from "../qrscan/qrscan";
 
 @Component({
   templateUrl: "tabs.html"
@@ -11,7 +12,7 @@ import { HomePage } from "../home/home";
 export class TabsPage {
   tab1Root = HomePage;
   tab2Root = MapPage;
-  tab3Root = QrReaderPage;
+  tab3Root = QrscanPage;
   tab4Root = SchedulePage;
 
   constructor() {}

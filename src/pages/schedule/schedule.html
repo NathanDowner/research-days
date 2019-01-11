@@ -1,10 +1,15 @@
 <ion-header>
   <ion-navbar> <ion-title>Schedule</ion-title> </ion-navbar>
+  <ion-searchbar
+    placeholder="Search for an event.."
+    [(ngModel)]="searchTerm"
+    (ionInput)="findEvents()"
+  ></ion-searchbar>
 </ion-header>
 
 <ion-content padding>
   <ion-item
-    *ngFor="let event of events"
+    *ngFor="let event of filterEvents"
     (click)="showEventPage(event)"
     text-wrap
     margin-bottom

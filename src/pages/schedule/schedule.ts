@@ -10,6 +10,8 @@ import { EventViewPage } from "../event-view/event-view";
 })
 export class SchedulePage implements OnInit {
   private events: Event[];
+  filterEvents: Event[];
+  private searchTerm: string;
 
   constructor(
     private navCtrl: NavController,
@@ -27,6 +29,18 @@ export class SchedulePage implements OnInit {
   }
 
   getEvents(): void {
-    this.eventsProvider.getEvents().subscribe(events => (this.events = events));
+    this.eventsProvider.getEvents().subscribe(events => {
+      this.events = events;
+      this.filterEvents = events;
+    });
+  }
+
+  findEvents() {
+    // if the value is an empty string don't filter the items
+    this.filterEvents = this.events.filter(event => {
+      return (
+        event.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
+      );
+    });
   }
 }

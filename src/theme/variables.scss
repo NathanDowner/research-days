@@ -20,7 +20,6 @@ $app-direction: ltr;
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 // $tabs-background: linear-gradient(to left, #333333e7, #dd1818e7);
 
-
 //Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -41,20 +40,19 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 $tabs-ios-tab-color-active: #f53d3d;
-
+$searchbar-ios-background-color: #f53d3d;
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 // App Windows Variables
 // --------------------------------------------------
 $tabs-md-tab-color-active: #f53d3d;
-
-
+$searchbar-md-background-color: #f53d3d;
 // Windows only Sass variables can go here
 // App Theme
 // --------------------------------------------------
 $tabs-wp-tab-color-active: #f53d3d;
-
+$searchbar-wp-background-color: #f53d3d;
 // Ionic apps can have different themes applied, which can
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's

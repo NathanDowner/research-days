@@ -8,7 +8,8 @@ import { QrReaderPage } from "../pages/qr-reader/qr-reader";
 import { HomePage } from "../pages/home/home";
 import { MapPage } from "../pages/map/map";
 import { TabsPage } from "../pages/tabs/tabs";
-import {QrscanPage} from "../pages/qrscan/qrscan";
+import { QrscanPage } from "../pages/qrscan/qrscan";
+import { QrscanAngPage } from "../pages/qrscan-ang/qrscan-ang";
 
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -20,6 +21,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 //plugins
 import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
+import { NgQrScannerModule } from "angular2-qrscanner";
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
     QrReaderPage,
     HomePage,
     QrscanPage,
+    QrscanAngPage,
     SchedulePage,
     TabsPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    NgQrScannerModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataProvider, {
       dataEncapsulation: false
@@ -46,6 +50,7 @@ import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
     QrReaderPage,
     HomePage,
     QrscanPage,
+    QrscanAngPage,
     SchedulePage,
     TabsPage
   ],

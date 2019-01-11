@@ -5,6 +5,7 @@ import { SchedulePage } from "../schedule/schedule";
 import { QrReaderPage } from "../qr-reader/qr-reader";
 import { HomePage } from "../home/home";
 import {QrscanPage} from "../qrscan/qrscan";
+import {QrscanAngPage} from "../qrscan-ang/qrscan-ang";
 
 @Component({
   templateUrl: "tabs.html"
@@ -12,7 +13,7 @@ import {QrscanPage} from "../qrscan/qrscan";
 export class TabsPage {
   tab1Root = HomePage;
   tab2Root = MapPage;
-  tab3Root = QrscanPage;
+  tab3Root = QrscanAngPage;
   tab4Root = SchedulePage;
 
   constructor() {}

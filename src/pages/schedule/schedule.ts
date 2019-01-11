@@ -9,16 +9,20 @@ import { EventViewPage } from "../event-view/event-view";
   templateUrl: "schedule.html"
 })
 export class SchedulePage {
-  private events: Event[];
+  events: Event[];
   filterEvents: Event[];
-  private searchTerm: string;
+  searchTerm: string;
+  day1: Event[] = [];
+  day2: Event[] = [];
+  day3: Event[] = [];
+  day:string = "day1";
 
   constructor(
     private navCtrl: NavController,
     private eventsProvider: EventsProvider
   ) {}
 
-  ionViewDidLoad(): void {
+  ionViewDidLoad() {
     this.getEvents();
   }
 

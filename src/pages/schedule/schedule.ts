@@ -9,10 +9,11 @@ import { EventViewPage } from "../event-view/event-view";
   templateUrl: "schedule.html"
 })
 export class SchedulePage {
-  private events: Event[];
-  private day1: Event[] = [];
-  private day2: Event[] = [];
-  private day3: Event[] = [];
+  events: Event[];
+  day1: Event[] = [];
+  day2: Event[] = [];
+  day3: Event[] = [];
+  day:string = "day1";
 
 
   constructor(
@@ -27,19 +28,20 @@ export class SchedulePage {
     this.getEvents();
   }
 
-  daySort(events: Event[]): void {
-    events.forEach(e => {
-      switch(e.day) {
-        case 1:
-          this.day1.push(e); break;
-        case 2:
-          this.day2.push(e); break;
-        case 3:
-          this.day3.push(e); break;
-      }
-    });
-    console.log(this.day1, this.day2, this.day3);
-  }
+  // daySort(events: Event[]): void {
+  //   events.forEach(e => {
+  //     switch(e.day) {
+  //       case 1:
+  //         this.day1.push(e); break;
+  //       case 2:
+  //         this.day2.push(e); break;
+  //       case 3:
+  //         this.day3.push(e); break;
+  //     }
+  //   });
+  //   console.log(this.day1, this.day2, this.day3);
+  // }
+
   /**
    * Shows what teh value of each event's day is as a pop up at the bottom of the screen
    * @param event 

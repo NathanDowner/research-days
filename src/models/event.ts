@@ -13,7 +13,7 @@ export interface Event {
     name: string;
     coords: {
       lat: number;
-      lon: number;
+      lng: number;
     };
   };
 }

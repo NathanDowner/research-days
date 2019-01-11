@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MapPage } from '../map/map';
+import { Event } from '../../models/Event';
 
 @IonicPage()
 @Component({
@@ -8,7 +10,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EventViewPage {
 
-  event: any;
+  event: Event;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.event = this.navParams.get('event');
@@ -18,8 +20,10 @@ export class EventViewPage {
     console.log('ionViewDidLoad EventViewPage');
   }
 
-  findOnMap(coords) {
-
+  findOnMap() {
+    this.navCtrl.push(MapPage, {
+      coords: this.event.location.coords
+    });
   }
 
 }

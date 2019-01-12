@@ -1,5 +1,5 @@
-import { Component, ViewChild } from "@angular/core";
-import { NavController, Searchbar, ModalController } from "ionic-angular";
+import { Component} from "@angular/core";
+import { NavController} from "ionic-angular";
 import { EventsProvider } from "../../providers/events/events";
 import { Event } from "../../models/event";
 import { EventViewPage } from "../event-view/event-view";
@@ -11,7 +11,6 @@ import { EventViewPage } from "../event-view/event-view";
 export class SchedulePage {
 
   isSearching: boolean = false;
-
   events: Event[];
   filterEvents: Event[];
   searchTerm: string;

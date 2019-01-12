@@ -24,7 +24,7 @@ export class QrscanAngPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  @ViewChild(QrScannerComponent) qrScannerComponent: QrScannerComponent ;
+  @ViewChild(QrScannerComponent) qrScannerComponent: QrScannerComponent;
 
   prepare() {
     this.qrScannerComponent.getMediaDevices().then(devices => {  // receive all user media devices

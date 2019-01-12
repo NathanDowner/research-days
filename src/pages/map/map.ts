@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavParams, Platform, Toast, ToastController } from "ionic-angular";
+import { Geolocation } from "@ionic-native/geolocation";
 
 declare var google;
 
@@ -16,12 +17,16 @@ export class MapPage {
   deviceLocation: google.maps.LatLng;
 
 
-  constructor(private navParams: NavParams) {}
+  constructor(private navParams: NavParams, private geoLoc: Geolocation, private plt: Platform, private toast: ToastController) {}
   
   ionViewDidLoad() {
+    this.plt.ready().then(_ => {
+      this.initMap();
+      this.getDeviceLocation();
+    })
     console.log('ionViewDidLoad MapPage');
-    this.initMap();
-    this.getDeviceLocation();
+    
+    
   }
   
   getEventLoc() {
@@ -38,6 +43,13 @@ export class MapPage {
   getDeviceLocation() {
     this.deviceLocation = this.center; //should be actual device location
   }
+
+  showToast(coords: {}) {
+    this.toast.create( {
+      message: `your coords: ${coords}`,
+      duration: 2000
+    }).present();
+  }
   
   initMap() {
 
@@ -45,12 +57,19 @@ export class MapPage {
 
     let coords = this.center;
     let mapOptions = {
-      center: this.eventLoc ? this.eventLoc: coords,
+      // center: this.eventLoc ? this.eventLoc: coords,
       zoom: 17,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      fullscreenControl: false
     };
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos => {
+      let userPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+      this.map.setCenter(userPos);
+      this.showToast(userPos);
+    })
 
     let marker: google.maps.Marker = new google.maps.Marker({
       map: this.map,

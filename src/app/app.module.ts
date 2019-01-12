@@ -11,6 +11,7 @@ import { TabsPage } from "../pages/tabs/tabs";
 
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
+import { Geolocation } from "@ionic-native/geolocation";
 
 import { EventsProvider } from "../providers/events/events";
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
@@ -51,7 +52,8 @@ import { EventViewPage } from "../pages/event-view/event-view";
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     EventsProvider,
-    InMemoryDataProvider
+    InMemoryDataProvider,
+    Geolocation
   ]
 })
 export class AppModule {}

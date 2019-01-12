@@ -4,7 +4,8 @@
       <ion-title *ngIf="!isSearching">Schedule</ion-title> 
       <ion-buttons end>
         <button ion-button icon-only (click)="toggleSearch()">
-          <ion-icon name="search"></ion-icon>
+          <ion-icon *ngIf="!isSearching" name="search"></ion-icon>
+          <ion-icon *ngIf="isSearching" name="close"></ion-icon> 
         </button>
       </ion-buttons>
     <!-- </div>  -->

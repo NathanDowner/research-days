@@ -13,7 +13,7 @@ import {QrscanAngPage} from "../qrscan-ang/qrscan-ang";
 export class TabsPage {
   tab1Root = HomePage;
   tab2Root = MapPage;
-  tab3Root = QrscanAngPage;
+  tab3Root = QrReaderPage;
   tab4Root = SchedulePage;
 
   constructor() {}

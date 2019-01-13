@@ -22,6 +22,7 @@ import { HttpClientModule } from "@angular/common/http";
 //plugins
 import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
 import { NgQrScannerModule } from "angular2-qrscanner";
+import { ZXingScannerModule } from "@zxing/ngx-scanner";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NgQrScannerModule } from "angular2-qrscanner";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     NgQrScannerModule,
+    ZXingScannerModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataProvider, {
       dataEncapsulation: false

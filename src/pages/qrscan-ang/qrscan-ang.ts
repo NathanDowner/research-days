@@ -18,8 +18,8 @@ import {QrScannerComponent} from "angular2-qrscanner";
 })
 export class QrscanAngPage {
 
-  width: String;
-  height: String;
+  width: string;
+  height: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

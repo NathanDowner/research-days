@@ -26,7 +26,7 @@ export class InMemoryDataProvider implements InMemoryDbService {
           name: fake("{{company.companyName}}"),
           coords: {
             lat: parseFloat(fake("{{address.latitude}}")),
-            lon: parseFloat(fake("{{address.longitude}}"))
+            lng: parseFloat(fake("{{address.longitude}}"))
           }
         }
       });

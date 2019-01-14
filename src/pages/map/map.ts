@@ -1,8 +1,9 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavParams, Platform, Toast, ToastController } from "ionic-angular";
+import { NavParams, Platform, ToastController } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
 
-declare var google;
+declare var google: any;
+
 
 @Component({
   selector: "page-map",

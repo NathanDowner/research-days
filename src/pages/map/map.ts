@@ -1,9 +1,15 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavParams, Platform, ToastController } from "ionic-angular";
+import { Component } from "@angular/core";
+import { Platform, ToastController } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
-
-declare var google: any;
-
+import { GoogleMap, 
+         GoogleMaps, 
+         GoogleMapsEvent,
+        //  GoogleMapControlOptions, 
+        //  CameraPosition,
+         Marker,
+        //  MarkerOptions, 
+         GoogleMapOptions, 
+         Environment} from "@ionic-native/google-maps";
 
 @Component({
   selector: "page-map",
@@ -11,39 +17,91 @@ declare var google: any;
 })
 export class MapPage {
 
-  @ViewChild("map") mapElement: ElementRef;
-  map: google.maps.Map;
-  center: google.maps.LatLng = new google.maps.LatLng(18.006168, -76.746955);
-  eventLoc: google.maps.LatLng = null;//new google.maps.LatLng(18.006168, -76.746955);
-  deviceLocation: google.maps.LatLng;
+  map: GoogleMap;
 
-
-  constructor(private navParams: NavParams, private geoLoc: Geolocation, private plt: Platform, private toast: ToastController) {}
+  constructor(private geoLoc: Geolocation, private plt: Platform, private toast: ToastController) {}
   
   ionViewDidLoad() {
     this.plt.ready().then(_ => {
-      this.initMap();
-      this.getDeviceLocation();
+      this.prepareBrowser();
+      this.loadMap();
+      
     })
     console.log('ionViewDidLoad MapPage');
     
     
   }
+
+  loadMap() {
+
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: 18.006168,
+          lng: -76.746955
+        },
+        zoom: 18,
+        tilt: 30
+      }
+    };
+
+    this.map = GoogleMaps.create('map_canvas', mapOptions);
+
+    this.map.one(GoogleMapsEvent.MAP_READY)
+      .then(() => console.log('Map is ready!'));
+
+    this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos =>{
+
+      // let marker: Marker = this.map.addMarkerSync({
+      //   title: 'Ionic',
+      //   icon: 'blue',
+      //   animation: 'DROP',
+      //   position: {
+      //     lat: pos.coords.latitude,
+      //     lng: pos.coords.longitude
+      //   }
+      // });
+
+      // marker.on(GoogleMapsEvent.MARKER_CLICK)
+      //   .subscribe(() => {
+      //     alert('clicked');
+      //   }
+      // );
+      this.map.addMarker({
+        title: 'You',
+        icon: 'red',
+        animation: 'DROP',
+        position: {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
+        }
+      }).then(marker => {
+        marker.on(GoogleMapsEvent.MARKER_CLICK)
+          .subscribe(() => {
+            this.showToast('clicked');
+          })
+      })
+
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+    //for event being passed
+        let eventMarker: Marker = this.map.addMarkerSync({
+          title: 'Event',
+          icon: 'red',
+          animation: 'DROP',
+          position: {
+            lat: 18.006168,
+            lng: -76.746955
+          }
+        });
   
-  getEventLoc() {
-    let coords = this.navParams.get('coords');
-    if (!coords) {
-      return null;
-    } else {
-      let lat = coords.lat;
-      let lng = coords.lng;
-      return new google.maps.LatLng(lat, lng);
-    }
+        eventMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(_ => {alert('ecent clicked')});
+
+
   }
-  
-  getDeviceLocation() {
-    this.deviceLocation = this.center; //should be actual device location
-  }
+
 
   showToast(coords: {}) {
     this.toast.create( {
@@ -51,33 +109,25 @@ export class MapPage {
       duration: 2000
     }).present();
   }
-  
-  initMap() {
 
-    this.eventLoc = this.getEventLoc();
-
-    let coords = this.center;
-    let mapOptions = {
-      // center: this.eventLoc ? this.eventLoc: coords,
-      zoom: 17,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      fullscreenControl: false
-    };
-
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-    this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos => {
-      let userPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-      this.map.setCenter(userPos);
-      this.showToast(userPos);
-    })
-
-    let marker: google.maps.Marker = new google.maps.Marker({
-      map: this.map,
-      position: this.getEventLoc(),
-      label: "Research Days"
-    });
+  prepareBrowser() {
+    if (document.URL.startsWith('http')) {
+      Environment.setEnv({
+        'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDKcmfgCAUE5RBxqOI8Ucsz9SHqjDjCVVA',
+        'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyDKcmfgCAUE5RBxqOI8Ucsz9SHqjDjCVVA'
+      })
+    }
   }
+  
+  // initMap() {
+
+  //   let locOpts = {enableHighAccuracy: true};
+  //   this.geoLoc.getCurrentPosition(locOpts).then(pos => {
+  //     let userPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+  //     // this.map.setCenter(userPos);
+  //     this.showToast(userPos);
+  //   })
+  // }
 }
 
 

@@ -18,6 +18,7 @@ import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { InMemoryDataProvider } from "../providers/in-memory-data/in-memory-data";
 import { HttpClientModule } from "@angular/common/http";
 import { EventViewPage } from "../pages/event-view/event-view";
+import { GoogleMaps } from "@ionic-native/google-maps";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { EventViewPage } from "../pages/event-view/event-view";
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     EventsProvider,
     InMemoryDataProvider,
-    Geolocation
+    Geolocation,
+    GoogleMaps
   ]
 })
 export class AppModule {}

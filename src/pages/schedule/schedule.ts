@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { NavController, ToastController } from "ionic-angular";
 import { EventsProvider } from "../../providers/events/events";
 import { Event } from "../../models/event";

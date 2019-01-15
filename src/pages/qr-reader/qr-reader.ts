@@ -5,6 +5,7 @@ import {NavController} from "ionic-angular";
 import BarcodeFormat from "@zxing/library/esm5/core/BarcodeFormat";
 
 //Scanner Component
+import { Result } from '@zxing/library';
 import {ZXingScannerComponent} from "@zxing/ngx-scanner";
 
 
@@ -43,6 +44,7 @@ export class QrReaderPage {
     this.autofocus = true;
     this.width = innerWidth.toString();
     this.height = innerHeight.toString();
+
   }
 
 

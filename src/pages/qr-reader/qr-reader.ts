@@ -84,7 +84,7 @@ export class QrReaderPage {
       this.hasPermission = answer;
       console.log("Permission: " + this.hasPermission);
       this.scannerEnabled = this.hasPermission;
-      this.restartScan();
+      // this.restartScan();
     });
   }
 
@@ -97,7 +97,6 @@ export class QrReaderPage {
   /** restarts current scan and starts again used to explicitly renew scanner to
    * reflect changes in 'scannerEnabled' */
   restartScan(): void {
-
     this.scanner.restartScan();
   }
 
@@ -147,4 +146,12 @@ export class QrReaderPage {
     console.log("IonViewWillLeave Qr Reader page");
     this.stopScanning();  // stops current scanner
   }
+
+
+  /** TO BE performed after page is exited */
+  // ionViewDidLeave(): void {
+  //   console.log("IonViewDidLeave Qr Reader page");
+  //   alert("IonViewDidLeave Qr Reader page");
+  //   this.stopScanning();
+  // }
 }

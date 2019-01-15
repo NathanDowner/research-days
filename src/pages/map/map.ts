@@ -48,7 +48,9 @@ export class MapPage {
     this.map = GoogleMaps.create('map_canvas', mapOptions);
 
     this.map.one(GoogleMapsEvent.MAP_READY)
-      .then(() => console.log('Map is ready!'));
+      .then(() => {
+        console.log('Map is ready!')
+    });
 
     this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos =>{
 
@@ -111,7 +113,7 @@ export class MapPage {
   }
 
   prepareBrowser() {
-    if (document.URL.startsWith('http')) {
+    if (document.URL.startsWith('localhost')) {
       Environment.setEnv({
         'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDKcmfgCAUE5RBxqOI8Ucsz9SHqjDjCVVA',
         'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyDKcmfgCAUE5RBxqOI8Ucsz9SHqjDjCVVA'

@@ -6,12 +6,12 @@
 
 </ion-header>
 
-<ion-content class="cameraView">
+<ion-content id="scanContainer">
   <zxing-scanner
     #scanner
     id="scanner"
     [formats]="allowedFormats"
-    [scannerEnabled]="hasPermission"
+    [scannerEnabled]="scannerEnabled"
     [autofocusEnabled]="autofocus"
     [device]="selectedDevice"
     (scanSuccess)="handleScan($event)"

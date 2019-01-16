@@ -1,9 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Schedule</ion-title>
+    <ion-searchbar
+      animated="true"
+      placeholder="Search For An Event..."
+      [(ngModel)]="searchTerm"
+      (ionInput)="findEvents()"
+    ></ion-searchbar>
     <ion-buttons end>
-      <button ion-button icon-only (click)="showSearchPage()">
-        <ion-icon name="search" color="light"></ion-icon>
+      <button ion-button icon-only (click)="cancelSearch()" color="light">
+        Cancel
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -12,20 +17,14 @@
 <ion-content padding>
   <ion-list>
     <ion-item
-      *ngFor="let event of events"
+      *ngFor="let event of filteredEvents"
       (click)="showEventPage(event)"
       text-wrap
-      margin-bottom
     >
       <ion-thumbnail item-start>
         <img src="{{ event.imgSrc }}" />
       </ion-thumbnail>
       <h2>{{ event.title }}</h2>
-      <p><ion-icon name="compass"></ion-icon> {{ event.venue }}</p>
-      <p>
-        <ion-icon name="time"></ion-icon> {{ event.startTime }} -
-        {{ event.endTime }}
-      </p>
     </ion-item>
   </ion-list>
 </ion-content>

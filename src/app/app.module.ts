@@ -17,6 +17,7 @@ import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { InMemoryDataProvider } from "../providers/in-memory-data/in-memory-data";
 import { HttpClientModule } from "@angular/common/http";
 import { EventViewPage } from "../pages/event-view/event-view";
+import { EventSearchPage } from "../pages/event-search/event-search";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EventViewPage } from "../pages/event-view/event-view";
     HomePage,
     SchedulePage,
     TabsPage,
-    EventViewPage
+    EventViewPage,
+    EventSearchPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { EventViewPage } from "../pages/event-view/event-view";
     HomePage,
     SchedulePage,
     TabsPage,
-    EventViewPage
+    EventViewPage,
+    EventSearchPage
   ],
   providers: [
     StatusBar,

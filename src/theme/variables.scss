@@ -37,13 +37,14 @@ $colors: (
 );
 
 $uwi-red: #cc0000;
+$uwi-white: #fff;
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 $tabs-ios-tab-color-active: $uwi-red;
-$searchbar-ios-background-color: $uwi-red;
-$segment-button-ios-border-color-activated: #fff;
-$segment-button-ios-text-color-activated: #fff;
+$searchbar-ios-background-color: $uwi-white;
+$segment-button-ios-border-color-activated: $uwi-white;
+$segment-button-ios-text-color-activated: $uwi-white;
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
@@ -51,15 +52,15 @@ $segment-button-ios-text-color-activated: #fff;
 // --------------------------------------------------
 $tabs-md-tab-color-active: $uwi-red;
 $searchbar-md-background-color: $uwi-red;
-$segment-button-md-border-color-activated: #fff;
-$segment-button-md-text-color-activated: #fff;
+$segment-button-md-border-color-activated: $uwi-white;
+$segment-button-md-text-color-activated: $uwi-white;
 // Windows only Sass variables can go here
 // App Theme
 // --------------------------------------------------
 $tabs-wp-tab-color-active: $uwi-red;
 $searchbar-wp-background-color: $uwi-red;
-$segment-button-wp-border-color-activated: #fff;
-$segment-button-wp-text-color-activated: #fff;
+$segment-button-wp-border-color-activated: $uwi-white;
+$segment-button-wp-text-color-activated: $uwi-white;
 // Ionic apps can have different themes applied, which can
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's

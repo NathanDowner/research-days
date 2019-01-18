@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Platform, ToastController } from "ionic-angular";
+import { Platform, ToastController, NavParams } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
 import { GoogleMap, 
          GoogleMaps, 
@@ -19,7 +19,7 @@ export class MapPage {
 
   map: GoogleMap;
 
-  constructor(private geoLoc: Geolocation, private plt: Platform, private toast: ToastController) {}
+  constructor(private geoLoc: Geolocation, private plt: Platform, private toast: ToastController, private navParams: NavParams) {}
   
   ionViewDidLoad() {
     this.plt.ready().then(_ => {
@@ -89,17 +89,21 @@ export class MapPage {
       console.log('Error getting location', error);
     });
     //for event being passed
-        let eventMarker: Marker = this.map.addMarkerSync({
-          title: 'Event',
-          icon: 'red',
-          animation: 'DROP',
-          position: {
-            lat: 18.006168,
-            lng: -76.746955
-          }
-        });
+        let evCoords = this.navParams.get('coords');
+        if (evCoords) {
+          let eventMarker: Marker = this.map.addMarkerSync({
+            title: 'Event',
+            icon: 'red',
+            animation: 'DROP',
+            position: {
+              lat: evCoords.lat,
+              lng: evCoords.lng
+            }
+          });
+          eventMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(_ => {alert('event clicked')});
+
+        }
   
-        eventMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(_ => {alert('ecent clicked')});
 
 
   }

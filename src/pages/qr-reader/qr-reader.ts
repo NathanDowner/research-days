@@ -5,8 +5,10 @@ import {NavController} from "ionic-angular";
 import BarcodeFormat from "@zxing/library/esm5/core/BarcodeFormat";
 
 //Scanner Component
-import { Result } from '@zxing/library';
 import {ZXingScannerComponent} from "@zxing/ngx-scanner";
+
+// InAppBrowser
+import {InAppBrowser, InAppBrowserObject} from "@ionic-native/in-app-browser";
 
 
 @Component({
@@ -19,7 +21,7 @@ export class QrReaderPage {
 
   // Scanner Information
   allowedFormats: BarcodeFormat[];        // formats the scanner is allowed to detect
-  result: String;                         // stores decoded qr scan result
+  result: string;                         // stores decoded qr scan result
   hasCameras: boolean;                    // does the device have cameras? unknown (false) at first
   availableDevices: MediaDeviceInfo[];    // stores all available cameras for scanner
   selectedDevice: MediaDeviceInfo;        // selected device to carry out scanning
@@ -27,24 +29,26 @@ export class QrReaderPage {
   scannerEnabled: boolean;                // Should scanning be going on?
   autofocus: boolean;                     // should the scanner use autofocus on the selected device
 
-  //Dimensions
+  // Dimensions
   width: string;                          // width of scanner camera preview space
   height: string;                         // width of scanner camera preview space
 
+  // Browser
+  browser: InAppBrowserObject;
 
   /**
    * Constructor
    * @param navCtrl
+   * @param iab
    * @constructor
    */
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private iab: InAppBrowser) {
     this.allowedFormats = [BarcodeFormat.QR_CODE];
     this.hasCameras = false;
     this.scannerEnabled = false;
     this.autofocus = true;
     this.width = innerWidth.toString();
     this.height = innerHeight.toString();
-
   }
 
 
@@ -115,9 +119,18 @@ export class QrReaderPage {
    * @param resultStr {string} - decoded string result from qr code
    */
   handleScan(resultStr: string): void {
+    let target: string = "_self";
     this.result = resultStr;
+    this.stopScanning();
+
+    // Regular JS implementation
+    window.open(this.result, target);
+
+    // InAppBrowser
+    // this.browser = this.iab.create(this.result, target, "location=no");
+
     console.log(this.result);
-    alert(this.result);
+    // alert(this.result);
   }
 
 

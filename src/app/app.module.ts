@@ -3,6 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
 import { MyApp } from "./app.component";
 
+// Pages
 import { SchedulePage } from "../pages/schedule/schedule";
 import { QrReaderPage } from "../pages/qr-reader/qr-reader";
 import { HomePage } from "../pages/home/home";
@@ -23,6 +24,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
 import { NgQrScannerModule } from "angular2-qrscanner";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { ZXingScannerModule } from "@zxing/ngx-scanner";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EventsProvider,
-    InMemoryDataProvider
+    InMemoryDataProvider,
+    InAppBrowser,
   ]
 
 })

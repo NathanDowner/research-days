@@ -120,6 +120,7 @@ export class QrReaderPage {
    */
   handleScan(resultStr: string): void {
     let target: string = "_self";
+    const options: string = "location=yes";
     this.result = resultStr;
     this.stopScanning();
 
@@ -127,7 +128,7 @@ export class QrReaderPage {
     window.open(this.result, target);
 
     // InAppBrowser
-    // this.browser = this.iab.create(this.result, target, "location=no");
+    // this.browser = this.iab.create(this.result, target, options);
 
     console.log(this.result);
     // alert(this.result);

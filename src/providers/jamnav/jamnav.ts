@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -16,8 +16,11 @@ export class JamnavProvider {
   }
 
   getCoords(location: string) {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers.append("Authorization","d6cb3d1cd7ad15117a54ede405f38ca529d3fb7e");
+
     let name: string = location.replace(" ", "+");
-    this.http.get(this.url + name);
+    this.http.get(this.url + name, {headers: headers});
   }
 
 }

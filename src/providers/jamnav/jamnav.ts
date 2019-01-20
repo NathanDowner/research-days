@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Location } from '../../models/location';
+import { Observable } from 'rxjs';
 
 /*
   Generated class for the JamnavProvider provider.
@@ -15,12 +17,12 @@ export class JamnavProvider {
     console.log('Hello JamnavProvider Provider');
   }
 
-  getCoords(location: string) {
+  getLocationData(location: string): Observable<Location> {
     let headers: HttpHeaders = new HttpHeaders();
     headers.append("Authorization","d6cb3d1cd7ad15117a54ede405f38ca529d3fb7e");
 
     let name: string = location.replace(" ", "+");
-    this.http.get(this.url + name, {headers: headers});
+    return this.http.get<Location>(this.url + name, {headers: headers});
   }
 
 }

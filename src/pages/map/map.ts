@@ -89,15 +89,15 @@ export class MapPage {
       console.log('Error getting location', error);
     });
     //for event being passed
-        let evCoords = this.navParams.get('coords');
-        if (evCoords) {
+        let evInfo = this.navParams.get('eventInfo');
+        if (evInfo) {
           let eventMarker: Marker = this.map.addMarkerSync({
-            title: 'Event',
+            title: evInfo.title,
             icon: 'red',
             animation: 'DROP',
             position: {
-              lat: evCoords.lat,
-              lng: evCoords.lng
+              lat: evInfo.lat,
+              lng: evInfo.lng
             }
           });
           eventMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(_ => {alert('event clicked')});

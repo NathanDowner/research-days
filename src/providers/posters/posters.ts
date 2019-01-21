@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {catchError, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
@@ -52,7 +52,7 @@ export class PostersProvider {
    * @param result
    */
   private handleError<T>(operation = "operation", result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: HttpErrorResponse): Observable<T> => {
       console.error(operation + " operation failed: " + error.message);
       return of(result as T);
     };

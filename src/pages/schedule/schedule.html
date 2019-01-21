@@ -3,61 +3,10 @@
   <ion-navbar> 
     <ion-title>Schedule</ion-title> 
   </ion-navbar>
-
-  <ion-toolbar>
-      <ion-segment [(ngModel)]="day">
-        <ion-segment-button value="day1">Day 1</ion-segment-button>
-        <ion-segment-button value="day2">Day 2</ion-segment-button>
-        <ion-segment-button value="day3">Day 3</ion-segment-button>
-      </ion-segment>
-    </ion-toolbar>
 </ion-header>
 
 
 
 <ion-content padding>
-
-  
-
-  <div [ngSwitch]="day">
-
-    <ion-list *ngSwitchCase="'day1'">
-      <h2>Day 1</h2>
-      <ion-item *ngFor="let event of day1" (click)="showToast(event)" text-wrap margin-bottom>
-        <ion-thumbnail item-start> <img src="{{ event.imgSrc }}" /> </ion-thumbnail>
-        <h2>{{ event.title }}</h2>
-        <p><ion-icon name="compass"></ion-icon> {{ event.venue }}</p>
-        <p>
-          <ion-icon name="time"></ion-icon> {{ event.startTime }} - {{ event.endTime }}
-        </p>
-      </ion-item>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'day2'">
-      <h2>Day 2</h2>
-      <ion-item *ngFor="let event of day2" (click)="showToast(event)" text-wrap margin-bottom>
-        <ion-thumbnail item-start> <img src="{{ event.imgSrc }}" /> </ion-thumbnail>
-        <h2>{{ event.title }}</h2>
-        <p><ion-icon name="compass"></ion-icon> {{ event.venue }}</p>
-        <p>
-          <ion-icon name="time"></ion-icon> {{ event.startTime }} -
-          {{ event.endTime }}
-        </p>
-      </ion-item>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'day3'">
-      <h2>Day 3</h2>
-      <ion-item *ngFor="let event of day3" (click)="showToast(event)" text-wrap margin-bottom>
-        <ion-thumbnail item-start> <img src="{{ event.imgSrc }}" /> </ion-thumbnail>
-        <h2>{{ event.title }}</h2>
-        <p><ion-icon name="compass"></ion-icon> {{ event.venue }}</p>
-        <p>
-          <ion-icon name="time"></ion-icon> {{ event.startTime }} - {{ event.endTime }}
-        </p>
-      </ion-item>
-    </ion-list>
-
-  </div>
 
 </ion-content>

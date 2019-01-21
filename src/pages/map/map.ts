@@ -27,7 +27,7 @@ export class MapPage {
   loadMap() {
 
     //location
-    const location = new google.maps.LatLng(18.006168,-76.746955);
+    const location = new google.maps.LatLng(18.006168, -76.746955);
 
     const options = {
       center: location,
@@ -41,21 +41,25 @@ export class MapPage {
     if (navigator.geolocation) {
 
       navigator.geolocation.watchPosition(
-        (pos) => {
+        pos => {
           let lat = pos.coords.latitude;
           let lng = pos.coords.longitude;
 
           this.addMarker(new google.maps.LatLng(lat, lng), "your location");
-        }
+        },
+        err => {
+          alert("Your location is not currently available.");
+        },
+        {enableHighAccuracy: true}
       );
       // let pos = navigator.geolocation.getCurrentPosition(
-      //   // pos => {
-      //   //   let geo = {
-      //   //     lat: pos.coords.latitude,
-      //   //     lng: pos.coords.longitude
-      //   //   }
-      //   //   this.addMarker(new google.maps.LatLng(geo.lat, geo.lng), "Your location");
-      //   // }
+      //   pos => {
+      //     let geo = {
+      //       lat: pos.coords.latitude,
+      //       lng: pos.coords.longitude
+      //     }
+      //     this.addMarker(new google.maps.LatLng(geo.lat, geo.lng), "Your location");
+      //   }
       // );
     }
     // this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos =>{
@@ -81,6 +85,7 @@ export class MapPage {
   addMarker(position: google.maps.LatLng, title: string) {
     return new google.maps.Marker({
       title: title,
+      label: title,
       position: position,
       map: this.map
     });

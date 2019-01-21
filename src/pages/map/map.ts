@@ -35,35 +35,55 @@ export class MapPage {
     };
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-    
+    this.addMarker(location, "Map Center!")
     //get user location
     
-    this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos =>{
+    if (navigator.geolocation) {
 
+      navigator.geolocation.watchPosition(
+        (pos) => {
+          let lat = pos.coords.latitude;
+          let lng = pos.coords.longitude;
 
-
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-    //for event being passed
-        let evInfo = this.navParams.get('eventInfo');
-        if (evInfo) {
-          
-  
-
-
+          this.addMarker(new google.maps.LatLng(lat, lng), "your location");
         }
+      );
+      // let pos = navigator.geolocation.getCurrentPosition(
+      //   // pos => {
+      //   //   let geo = {
+      //   //     lat: pos.coords.latitude,
+      //   //     lng: pos.coords.longitude
+      //   //   }
+      //   //   this.addMarker(new google.maps.LatLng(geo.lat, geo.lng), "Your location");
+      //   // }
+      // );
+    }
+    // this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos =>{
 
-  
-  // initMap() {
+    //   let geo = {
+    //     lat: pos.coords.latitude,
+    //     lng: pos.coords.longitude
+    //   }
 
-  //   let locOpts = {enableHighAccuracy: true};
-  //   this.geoLoc.getCurrentPosition(locOpts).then(pos => {
-  //     let userPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-  //     // this.map.setCenter(userPos);
-  //     this.showToast(userPos);
-  //   })
-  // }
+    //   // alert(`lat:${geo.lat}, lng: ${geo.lng}`)
+    //   this.addMarker(new google.maps.LatLng(geo.lat, geo.lng), "Your location");
+
+    // }).catch((error) => {
+    //   console.log('Error getting location', error);
+    // });
+    //for event being passed
+    let evInfo = this.navParams.get('eventInfo');
+    if (evInfo) {
+
+    }
+  }
+
+  addMarker(position: google.maps.LatLng, title: string) {
+    return new google.maps.Marker({
+      title: title,
+      position: position,
+      map: this.map
+    });
   }
 
 }

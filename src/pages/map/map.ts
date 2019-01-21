@@ -1,15 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild, ElementRef } from "@angular/core";
 import { Platform, ToastController, NavParams } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
-import { GoogleMap, 
-         GoogleMaps, 
-         GoogleMapsEvent,
-        //  GoogleMapControlOptions, 
-        //  CameraPosition,
-         Marker,
-        //  MarkerOptions, 
-         GoogleMapOptions, 
-         Environment} from "@ionic-native/google-maps";
+
 
 @Component({
   selector: "page-map",
@@ -17,72 +9,37 @@ import { GoogleMap,
 })
 export class MapPage {
 
-  map: GoogleMap;
+  map: google.maps.Map;
+  @ViewChild('map') mapRef: ElementRef;
 
   constructor(private geoLoc: Geolocation, private plt: Platform, private toast: ToastController, private navParams: NavParams) {}
-  
+
   ionViewDidLoad() {
     this.plt.ready().then(_ => {
-      this.prepareBrowser();
+      // this.prepareBrowser();
       this.loadMap();
       
     })
     console.log('ionViewDidLoad MapPage');
     
-    
   }
 
   loadMap() {
 
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 18.006168,
-          lng: -76.746955
-        },
-        zoom: 18,
-        tilt: 30
-      }
+    //location
+    const location = new google.maps.LatLng(18.006168,-76.746955);
+
+    const options = {
+      center: location,
+      zoom: 12
     };
 
-    this.map = GoogleMaps.create('map_canvas', mapOptions);
-
-    this.map.one(GoogleMapsEvent.MAP_READY)
-      .then(() => {
-        console.log('Map is ready!')
-    });
-
+    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+    
+    //get user location
+    
     this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos =>{
 
-      // let marker: Marker = this.map.addMarkerSync({
-      //   title: 'Ionic',
-      //   icon: 'blue',
-      //   animation: 'DROP',
-      //   position: {
-      //     lat: pos.coords.latitude,
-      //     lng: pos.coords.longitude
-      //   }
-      // });
-
-      // marker.on(GoogleMapsEvent.MARKER_CLICK)
-      //   .subscribe(() => {
-      //     alert('clicked');
-      //   }
-      // );
-      this.map.addMarker({
-        title: 'You',
-        icon: 'red',
-        animation: 'DROP',
-        position: {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        }
-      }).then(marker => {
-        marker.on(GoogleMapsEvent.MARKER_CLICK)
-          .subscribe(() => {
-            this.showToast('clicked');
-          })
-      })
 
 
     }).catch((error) => {
@@ -91,39 +48,12 @@ export class MapPage {
     //for event being passed
         let evInfo = this.navParams.get('eventInfo');
         if (evInfo) {
-          let eventMarker: Marker = this.map.addMarkerSync({
-            title: evInfo.title,
-            icon: 'red',
-            animation: 'DROP',
-            position: {
-              lat: evInfo.lat,
-              lng: evInfo.lng
-            }
-          });
-          eventMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(_ => {alert('event clicked')});
-
-        }
+          
   
 
 
-  }
+        }
 
-
-  showToast(coords: {}) {
-    this.toast.create( {
-      message: `your coords: ${coords}`,
-      duration: 2000
-    }).present();
-  }
-
-  prepareBrowser() {
-    if (document.URL.startsWith('localhost')) {
-      Environment.setEnv({
-        'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDKcmfgCAUE5RBxqOI8Ucsz9SHqjDjCVVA',
-        'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyDKcmfgCAUE5RBxqOI8Ucsz9SHqjDjCVVA'
-      })
-    }
-  }
   
   // initMap() {
 
@@ -134,6 +64,6 @@ export class MapPage {
   //     this.showToast(userPos);
   //   })
   // }
+  }
+
 }
-
-

@@ -34,15 +34,13 @@ export class EventViewPage {
     console.log(this.location); 
   }
 
-
-
   findOnMap() {
     this.navCtrl.push(MapPage, {
       eventInfo: {
         title: this.event.title,
         lat: this.location.geometry.coordinates[1],
         lng: this.location.geometry.coordinates[0],
-       }
+      }
     });
   }
 

@@ -5,23 +5,20 @@ import { Event } from "../../models/event";
 
 @Injectable()
 export class InMemoryDataProvider implements InMemoryDbService {
-  private MAX_EVENTS: number = 15;
+  private MAX_EVENTS: number = 96;
 
   createDb() {
     const events: Event[] = [];
 
     for (let i = 0; i < this.MAX_EVENTS; i++) {
       events.push({
-        id: i + 1,
+        nid: `${i + 1}`,
         title: fake("{{name.title}}"),
-        host: fake("{{company.companyName}}"),
-        startTime: "11:00am",
-        day: Math.ceil(Math.random() * 3),
-        endTime: "11:00pm",
+        researcher_name: fake("{{name.firstName}} {{name.lastName}}"),
+        date: "2019-02-3 11:00am",
+        abstract: fake("{{lorem.paragraph}}"),
+        path: "/fake/path",
         imgSrc: fake("{{image.imageUrl}}"),
-        venue: fake("{{address.city}}"),
-        speaker: fake("{{name.title}}. {{name.firstName}} {{name.lastName}}"),
-        description: fake("{{lorem.paragraph}}"),
         location: {
           name: fake("{{company.companyName}}"),
           coords: {

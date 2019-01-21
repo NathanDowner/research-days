@@ -1,0 +1,13 @@
+ion-toolbar.scrollable-segments {
+  overflow-x: scroll;
+  white-space: nowrap;
+  background: $uwi-red;
+}
+
+ion-toolbar button.date-filter {
+  margin: 0 4px;
+}
+
+ion-toolbar ion-buttons button {
+  font-size: 8px;
+}

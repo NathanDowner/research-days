@@ -36,13 +36,16 @@ $colors: (
   dark: #222
 );
 
-$uwi-red: #cc0000;
+$uwi-red: #ce1111;
 $uwi-white: #fff;
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 $tabs-ios-tab-color-active: $uwi-red;
-$searchbar-ios-background-color: $uwi-white;
+$searchbar-ios-input-text-color: $uwi-white;
+$searchbar-ios-input-placeholder-color: $uwi-white;
+$searchbar-ios-input-search-icon-color: $uwi-white;
+$searchbar-ios-input-clear-icon-color: $uwi-white;
 $segment-button-ios-border-color-activated: $uwi-white;
 $segment-button-ios-text-color-activated: $uwi-white;
 // App Material Design Variables

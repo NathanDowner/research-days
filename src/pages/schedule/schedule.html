@@ -1,31 +1,63 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Schedule</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="showSearchPage()">
-        <ion-icon name="search" color="light"></ion-icon>
+    <ion-searchbar
+      #searchbar
+      animated="true"
+      placeholder="Search For An Event..."
+      [(ngModel)]="searchTerm"
+      (ionInput)="findEvents()"
+      (ionFocus)="showFilters()"
+      (ionBlur)="toggleIsSearching()"
+    ></ion-searchbar>
+    <ion-buttons *ngIf="isSearching" end>
+      <button ion-button>
+        <ion-icon
+          class="filter-icon"
+          name="funnel"
+          (click)="showFilterOptions()"
+          color="light"
+        ></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar
+    *ngIf="!isSearching || isFiltering"
+    class="scrollable-segments"
+    no-border
+    padding-horizontal
+  >
+    <div padding-bottom>
+      <button
+        ion-button
+        icon-start
+        round
+        class="date-filter"
+        color="danger"
+        *ngFor="let filter of dateFilters"
+        (click)="filterEvents(filter)"
+        small
+      >
+        <ion-icon name="calendar"></ion-icon>
+        {{ filter }}
+      </button>
+    </div>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
+  <ion-list [virtualScroll]="filteredEvents" approxItemHeight="100px">
     <ion-item
-      *ngFor="let event of events"
+      *virtualItem="let event"
       (click)="showEventPage(event)"
       text-wrap
       margin-bottom
     >
       <ion-thumbnail item-start>
-        <img src="{{ event.imgSrc }}" />
+        <ion-img [src]="event.imgSrc"></ion-img>
       </ion-thumbnail>
       <h2>{{ event.title }}</h2>
-      <p><ion-icon name="compass"></ion-icon> {{ event.venue }}</p>
-      <p>
-        <ion-icon name="time"></ion-icon> {{ event.startTime }} -
-        {{ event.endTime }}
-      </p>
+      <p><ion-icon name="pin"></ion-icon> {{ event.location.name }}</p>
+      <p><ion-icon name="time"></ion-icon> {{ event.date }}</p>
     </ion-item>
   </ion-list>
 </ion-content>

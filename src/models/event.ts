@@ -1,14 +1,11 @@
 export interface Event {
-  id: number;
+  nid: string;
   title: string;
-  host: string;
-  startTime: string;
-  endTime: string;
-  day: number;
+  researcher_name: string;
+  date: string;
+  abstract: string;
+  path: string; // this field is used for QR generation
   imgSrc: string;
-  venue: string;
-  speaker: string;
-  description: string;
   location: {
     name: string;
     coords: {

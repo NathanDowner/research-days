@@ -1,9 +1,8 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { NavController, NavParams } from "ionic-angular";
 import { Event } from "../../models/event";
 import { EventViewPage } from "../event-view/event-view";
 
-@IonicPage()
 @Component({
   selector: "page-event-search",
   templateUrl: "event-search.html"
@@ -22,7 +21,7 @@ export class EventSearchPage {
     this.navCtrl.pop();
   }
 
-  showEventPage(event) {
+  showEventPage(event: Event): void {
     this.navCtrl.push(EventViewPage, {
       event: event
     });
@@ -40,16 +39,17 @@ export class EventSearchPage {
   isInEvent(item: Event, value: string): boolean {
     return (
       this.inField(item.title, value) ||
-      this.inField(item.speaker, value) ||
-      this.inField(item.venue, value)
+      this.inField(item.researcher_name, value) ||
+      this.inField(item.location.name, value) ||
+      this.inField(item.abstract, value)
     );
   }
 
-  findEvents() {
+  findEvents(): void {
     let val = this.searchTerm;
     // if the value is an empty string don't filter the items
     this.filteredEvents = this.navParams
       .get("events")
-      .filter(item => this.isInEvent(item, val));
+      .filter((item: Event) => this.isInEvent(item, val));
   }
 }

@@ -1,9 +1,3 @@
-<!--
-  Generated template for the EventViewPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
     <ion-title>{{ event.title }}</ion-title>
@@ -17,26 +11,18 @@
       <h3 class="event-title">{{ event.title }}</h3>
     </ion-row>
     <ion-row>
-      <span class="text-muted">
-        Time: {{ event.startTime }} - {{ event.endTime }}
-      </span>
+      <span class="text-muted"> Time: {{ event.date }} </span>
     </ion-row>
-    <h4>Speaker: {{ event.speaker }}</h4>
+    <h4>Researcher: {{ event.researcher_name }}</h4>
     <ion-row>
-      <ion-col>Location: {{ event.venue }}</ion-col>
+      <ion-col>Location: {{ event.location.name }}</ion-col>
       <ion-col>
-        <button
-          ion-button
-          outline
-          round
-          color="danger"
-          (click)="findOnMap()"
-        >
+        <button ion-button outline round color="danger" (click)="findOnMap()">
           Locate
         </button>
       </ion-col>
     </ion-row>
     <h4>Details</h4>
-    <p>{{ event.description }}</p>
+    <p>{{ event.abstract }}</p>
   </div>
 </ion-content>

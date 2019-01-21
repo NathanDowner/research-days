@@ -6,41 +6,86 @@
       placeholder="Search For An Event..."
       [(ngModel)]="searchTerm"
       (ionInput)="findEvents()"
-      (ionFocus)="showFilters()"
+      (ionFocus)="toggleIsSearching()"
       (ionBlur)="toggleIsSearching()"
     ></ion-searchbar>
-    <ion-buttons *ngIf="isSearching" end>
-      <button ion-button>
-        <ion-icon
-          class="filter-icon"
-          name="funnel"
-          (click)="showFilterOptions()"
-          color="light"
-        ></ion-icon>
+    <ion-buttons end>
+      <button ion-button (click)="toggleIsFiltering()">
+        <ion-icon class="filter-icon" name="funnel" color="light"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar
-    *ngIf="!isSearching || isFiltering"
+    *ngIf="!isSearching && !isFiltering"
     class="scrollable-segments"
     no-border
     padding-horizontal
   >
-    <div padding-bottom>
-      <button
-        ion-button
-        icon-start
-        round
-        class="date-filter"
-        color="danger"
-        *ngFor="let filter of dateFilters"
-        (click)="filterEvents(filter)"
-        small
-      >
-        <ion-icon name="calendar"></ion-icon>
-        {{ filter }}
-      </button>
-    </div>
+    <button
+      ion-button
+      icon-start
+      round
+      class="date-filter"
+      color="danger"
+      *ngFor="let filter of (dateFilters | slice: 0:3)"
+      (click)="filterEvents({ date: filter })"
+      small
+    >
+      <ion-icon name="calendar"></ion-icon>
+      {{ filter }}
+    </button>
+    <button
+      ion-button
+      icon-start
+      round
+      class="date-filter"
+      color="danger"
+      *ngFor="let filter of (dateFilters | slice: 3)"
+      (click)="filterEvents({ date: filter })"
+      small
+    >
+      <ion-icon name="calendar"></ion-icon>
+      {{ filter | date: "MMM dd" }}
+    </button>
+  </ion-toolbar>
+  <ion-toolbar color="light" *ngIf="isFiltering">
+    <ion-list>
+      <ion-list-header> Date </ion-list-header>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4 *ngFor="let date of (dateFilters | slice: 3)">
+            <ion-item>
+              <ion-label class="small-item">{{
+                date | date: "MMM dd"
+              }}</ion-label>
+              <ion-checkbox></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-list-header> Faculty </ion-list-header>
+      <ion-item>
+        <ion-label>Choose one...</ion-label>
+        <ion-select [(ngModel)]="faculty">
+          <ion-option value="scitech">Science & Technology</ion-option>
+          <ion-option value="sosci">Social Sciences</ion-option>
+          <ion-option value="humanities">Humanities & Education</ion-option>
+          <ion-option value="medsci">Medical Sciences</ion-option>
+          <ion-option value="eng">Engineering</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-list-header> Venue </ion-list-header>
+      <ion-item>
+        <ion-label>Choose one...</ion-label>
+        <ion-select [(ngModel)]="venue">
+          <ion-option value="asmbly">Assembly Hall</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <button ion-button full color="uwi">Search</button>
   </ion-toolbar>
 </ion-header>
 

@@ -25,6 +25,7 @@ import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
 import { NgQrScannerModule } from "angular2-qrscanner";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { PostersProvider } from '../providers/posters/posters';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
     EventsProvider,
     InMemoryDataProvider,
     InAppBrowser,
+    PostersProvider,
   ]
 
 })

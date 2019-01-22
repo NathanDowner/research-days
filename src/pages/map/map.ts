@@ -35,12 +35,13 @@ export class MapPage {
     };
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-    this.addMarker(location, "Map Center!")
+    this.addMarker(location, "Map Center!");
     //get user location
     
     if (navigator.geolocation) {
 
       navigator.geolocation.watchPosition(
+
         pos => {
           let lat = pos.coords.latitude;
           let lng = pos.coords.longitude;
@@ -75,11 +76,19 @@ export class MapPage {
     // }).catch((error) => {
     //   console.log('Error getting location', error);
     // });
+
+
     //for event being passed
     let evInfo = this.navParams.get('eventInfo');
     if (evInfo) {
 
     }
+
+    
+  }
+
+  addListeneres() {
+    // this.map.
   }
 
   addMarker(position: google.maps.LatLng, title: string) {
@@ -90,5 +99,7 @@ export class MapPage {
       map: this.map
     });
   }
+
+
 
 }

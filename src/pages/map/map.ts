@@ -10,9 +10,16 @@ import { Geolocation } from "@ionic-native/geolocation";
 export class MapPage {
 
   map: google.maps.Map;
+  locationArr: google.maps.Marker[];
   @ViewChild('map') mapRef: ElementRef;
 
-  constructor(private geoLoc: Geolocation, private plt: Platform, private toast: ToastController, private navParams: NavParams) {}
+  constructor(
+    private geoLoc: Geolocation, 
+    private plt: Platform, 
+    private toast: ToastController, 
+    private navParams: NavParams) { 
+      this.locationArr = [];
+    }
 
   ionViewDidLoad() {
     this.plt.ready().then(_ => {
@@ -31,11 +38,11 @@ export class MapPage {
 
     const options = {
       center: location,
-      zoom: 12
+      zoom: 15
     };
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-    this.addMarker(location, "Map Center!");
+    // this.addMarker(location, "Map Center!");
     //get user location
     
     if (navigator.geolocation) {
@@ -43,10 +50,18 @@ export class MapPage {
       navigator.geolocation.watchPosition(
 
         pos => {
-          let lat = pos.coords.latitude;
-          let lng = pos.coords.longitude;
+          if(this.locationArr.length == 0) {
+            this.locationArr = [];
 
-          this.addMarker(new google.maps.LatLng(lat, lng), "your location");
+          } else {
+            this.locationArr[0].setMap(null);
+            this.locationArr = [];
+          
+          }
+          let yourLoc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+          let marker = this.addMarker(yourLoc, "your location");
+          this.locationArr.push(marker);
+          this.map.panTo(yourLoc);
         },
         err => {
           alert("Your location is not currently available.");
@@ -99,6 +114,8 @@ export class MapPage {
       map: this.map
     });
   }
+
+
 
 
 

@@ -1,5 +1,6 @@
 export interface Filter {
-  date?: string | number;
+  dates?: (string | number)[];
   faculty?: string;
+  department?: string;
   venue?: string;
 }

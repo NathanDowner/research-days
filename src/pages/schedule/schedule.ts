@@ -12,6 +12,7 @@ import { Filter } from "../../models/filter";
 export class SchedulePage {
   events: Event[];
   filteredEvents: Event[];
+  filter: Filter;
 
   isSearching: boolean = false;
   isFiltering: boolean = false;
@@ -59,6 +60,13 @@ export class SchedulePage {
 
   toggleIsFiltering(): void {
     this.isFiltering = !this.isFiltering;
+    if (this.isFiltering) {
+      // reset the filter
+      this.filter.dates = [];
+      this.filter.faculty = "";
+      this.filter.department = "";
+      this.filter.venue = "";
+    }
   }
 
   isInField(field: any, value: string): boolean {
@@ -88,27 +96,35 @@ export class SchedulePage {
   }
 
   filterEvents(filterObject: Filter): void {
-    let dateFilter: any;
-
-    if (filterObject.date.toString().toLowerCase() === "all") {
+    if (filterObject.dates[0].toString().toLowerCase() === "all") {
       this.filteredEvents = this.events;
       return;
-    } else if (filterObject.date === "today") {
+    } else if (filterObject.dates.toString().toLowerCase() === "today") {
       // overwrite the "today" string with a date string of the current date
       const dt = new Date(Date.now());
-      filterObject.date = dt.toString();
-    } else if (filterObject.date.toString().toLowerCase() === "tomorrow") {
+      filterObject.dates[0] = this.formatDate(dt.toString());
+    } else if (filterObject.dates[0].toString().toLowerCase() === "tomorrow") {
       const dt = new Date(Date.now());
       dt.setDate(dt.getDate() + 1);
-      filterObject.date = dt.toString();
+      filterObject.date = this.formatDate(dt.toString());
     }
     // apply each filter incrementally to the results array
     this.filteredEvents = this.events.filter((event: Event) => {
-      console.log(filterObject.date);
-      return (
-        new Date(new Date(event.date).toString()).toString() ===
-        new Date(new Date(filterObject.date.toString()).toString()).toString()
-      );
+      console.log(filterObject.dates[0]);
+      console.log(event.date);
+      return event.date === filterObject.dates[0];
     });
+  }
+
+  private formatDate(date: string): string {
+    var d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
   }
 }

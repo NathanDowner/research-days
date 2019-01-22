@@ -15,7 +15,7 @@ export class InMemoryDataProvider implements InMemoryDbService {
         nid: `${i + 1}`,
         title: fake("{{name.title}}"),
         researcher_name: fake("{{name.firstName}} {{name.lastName}}"),
-        date: "2019-02-09",
+        date: "2019-02-06",
         abstract: fake("{{lorem.paragraph}}"),
         path: "/fake/path",
         imgSrc: fake("{{image.imageUrl}}"),

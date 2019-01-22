@@ -11,7 +11,11 @@
     ></ion-searchbar>
     <ion-buttons end>
       <button ion-button (click)="toggleIsFiltering()">
-        <ion-icon class="filter-icon" name="funnel" color="light"></ion-icon>
+        <ion-icon
+          class="filter-icon"
+          name="{{ !isFiltering ? 'funnel' : 'close-circle' }}"
+          color="light"
+        ></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -28,7 +32,7 @@
       class="date-filter"
       color="danger"
       *ngFor="let filter of (dateFilters | slice: 0:3)"
-      (click)="filterEvents({ date: filter })"
+      (click)="filterEvents({ dates: [filter] })"
       small
     >
       <ion-icon name="calendar"></ion-icon>
@@ -41,7 +45,7 @@
       class="date-filter"
       color="danger"
       *ngFor="let filter of (dateFilters | slice: 3)"
-      (click)="filterEvents({ date: filter })"
+      (click)="filterEvents({ dates: [filter] })"
       small
     >
       <ion-icon name="calendar"></ion-icon>
@@ -59,7 +63,7 @@
               <ion-label class="small-item">{{
                 date | date: "MMM dd"
               }}</ion-label>
-              <ion-checkbox></ion-checkbox>
+              <ion-checkbox (ionChange)="updateFilterDates()"></ion-checkbox>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -68,7 +72,7 @@
       <ion-list-header> Faculty </ion-list-header>
       <ion-item>
         <ion-label>Choose one...</ion-label>
-        <ion-select [(ngModel)]="faculty">
+        <ion-select [(ngModel)]="filter.faculty">
           <ion-option value="scitech">Science & Technology</ion-option>
           <ion-option value="sosci">Social Sciences</ion-option>
           <ion-option value="humanities">Humanities & Education</ion-option>
@@ -80,7 +84,7 @@
       <ion-list-header> Venue </ion-list-header>
       <ion-item>
         <ion-label>Choose one...</ion-label>
-        <ion-select [(ngModel)]="venue">
+        <ion-select [(ngModel)]="filter.venue">
           <ion-option value="asmbly">Assembly Hall</ion-option>
         </ion-select>
       </ion-item>

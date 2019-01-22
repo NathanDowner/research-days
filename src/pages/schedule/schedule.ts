@@ -12,7 +12,13 @@ import { Filter } from "../../models/filter";
 export class SchedulePage {
   events: Event[];
   filteredEvents: Event[];
-  filter: Filter;
+
+  filter: Filter = {
+    dates: [],
+    faculty: "",
+    department: "",
+    venue: ""
+  };
 
   isSearching: boolean = false;
   isFiltering: boolean = false;
@@ -81,9 +87,8 @@ export class SchedulePage {
   isInEvent(event: Event, searchString: string): boolean {
     return (
       this.isInField(event.title, searchString) ||
-      this.isInField(event.researcher_name, searchString) ||
-      this.isInField(event.location.name, searchString) ||
-      this.isInField(event.abstract, searchString)
+      this.isInField(event.venue, searchString) ||
+      this.isInField(event.details, searchString)
     );
   }
 
@@ -96,24 +101,43 @@ export class SchedulePage {
   }
 
   filterEvents(filterObject: Filter): void {
-    if (filterObject.dates[0].toString().toLowerCase() === "all") {
-      this.filteredEvents = this.events;
-      return;
-    } else if (filterObject.dates.toString().toLowerCase() === "today") {
-      // overwrite the "today" string with a date string of the current date
-      const dt = new Date(Date.now());
-      filterObject.dates[0] = this.formatDate(dt.toString());
-    } else if (filterObject.dates[0].toString().toLowerCase() === "tomorrow") {
-      const dt = new Date(Date.now());
-      dt.setDate(dt.getDate() + 1);
-      filterObject.date = this.formatDate(dt.toString());
+    console.log(filterObject);
+    let refinedResults: Event[] = this.events;
+
+    if (filterObject.dates.length > 0) {
+      if (filterObject.dates[0].toString().toLowerCase() === "all") {
+        this.filteredEvents = this.events;
+        return;
+      } else if (filterObject.dates[0].toString().toLowerCase() === "today") {
+        // get today's date in the format yyyy-mm-dd and replace the "today" string with it for later date comparisons
+        const dt = new Date(Date.now());
+        filterObject.dates[0] = this.formatDate(dt.toString());
+      } else if (
+        filterObject.dates[0].toString().toLowerCase() === "tomorrow"
+      ) {
+        // get today's date and add 1 to get tomorrow's date
+        const dt = new Date(Date.now());
+        dt.setDate(dt.getDate() + 1);
+
+        // convert the date to the format yyyy-mm-dd and replace the "tomorrow" string with it for later date comparisons.
+        filterObject.dates[0] = this.formatDate(dt.toString());
+      }
+      // apply each filter incrementally to the results array
+      refinedResults = refinedResults.filter((event: Event) => {
+        console.log(filterObject.dates[0]);
+        console.log(event.start_date);
+        return event.start_date === filterObject.dates[0];
+      });
     }
-    // apply each filter incrementally to the results array
-    this.filteredEvents = this.events.filter((event: Event) => {
-      console.log(filterObject.dates[0]);
-      console.log(event.date);
-      return event.date === filterObject.dates[0];
+    refinedResults = refinedResults.filter((event: Event) => {
+      if (filterObject.venue) {
+        return this.isInField(event.venue, filterObject.venue);
+      }
+      // if no filter for venue is specified just pass it
+      return true;
     });
+
+    this.filteredEvents = refinedResults;
   }
 
   private formatDate(date: string): string {

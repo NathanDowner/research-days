@@ -1,16 +1,16 @@
 export interface Event {
-  nid: string;
-  title: string;
-  researcher_name: string;
-  date: string;
-  abstract: string;
-  path: string; // this field is used for QR generation
+  id: string;
+  start_date: string;
+  title?: string;
+  type: string;
+  details: string;
+  faculty?: string;
+  department?: string;
   imgSrc: string;
-  location: {
-    name: string;
-    coords: {
-      lat: number;
-      lon: number;
-    };
+  link: string;
+  venue: string;
+  coords?: {
+    lat: number;
+    lon: number;
   };
 }

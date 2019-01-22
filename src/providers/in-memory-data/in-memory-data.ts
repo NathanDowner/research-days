@@ -12,19 +12,19 @@ export class InMemoryDataProvider implements InMemoryDbService {
 
     for (let i = 0; i < this.MAX_EVENTS; i++) {
       events.push({
-        nid: `${i + 1}`,
+        id: `${i + 1}`,
         title: fake("{{name.title}}"),
-        researcher_name: fake("{{name.firstName}} {{name.lastName}}"),
-        date: "2019-02-06",
-        abstract: fake("{{lorem.paragraph}}"),
-        path: "/fake/path",
+        type: "LECTURE PRESENTATION",
+        start_date: "2019-02-06",
+        details: fake("{{lorem.paragraph}}"),
+        faculty: "Science & Technology",
+        department: "Computing",
         imgSrc: fake("{{image.imageUrl}}"),
-        location: {
-          name: fake("{{company.companyName}}"),
-          coords: {
-            lat: parseFloat(fake("{{address.latitude}}")),
-            lon: parseFloat(fake("{{address.longitude}}"))
-          }
+        link: fake("{{image.imageUrl}}"),
+        venue: "Assembly Hall",
+        coords: {
+          lat: parseFloat(fake("{{address.latitude}}")),
+          lon: parseFloat(fake("{{address.longitude}}"))
         }
       });
     }

@@ -73,11 +73,15 @@
       <ion-item>
         <ion-label>Choose one...</ion-label>
         <ion-select [(ngModel)]="filter.faculty">
-          <ion-option value="scitech">Science & Technology</ion-option>
-          <ion-option value="sosci">Social Sciences</ion-option>
-          <ion-option value="humanities">Humanities & Education</ion-option>
-          <ion-option value="medsci">Medical Sciences</ion-option>
-          <ion-option value="eng">Engineering</ion-option>
+          <ion-option value="Science & Technology"
+            >Science & Technology</ion-option
+          >
+          <ion-option value="Social Sciences">Social Sciences</ion-option>
+          <ion-option value="Humanities & Education"
+            >Humanities & Education</ion-option
+          >
+          <ion-option value="Medical Sciences">Medical Sciences</ion-option>
+          <ion-option value="Engineering">Engineering</ion-option>
         </ion-select>
       </ion-item>
 
@@ -85,11 +89,14 @@
       <ion-item>
         <ion-label>Choose one...</ion-label>
         <ion-select [(ngModel)]="filter.venue">
-          <ion-option value="asmbly">Assembly Hall</ion-option>
+          <ion-option value="Assembly Hall">Assembly Hall</ion-option>
+          <ion-option value="Tent">Tent</ion-option>
+          <ion-option value="Main Library">Main Library</ion-option>
+          <ion-option value="Undercroft">The Undercroft</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
-    <button ion-button full color="uwi">Search</button>
+    <button ion-button full color="uwi" (click)="filterEvents(filter)">Search</button>
   </ion-toolbar>
 </ion-header>
 
@@ -105,8 +112,8 @@
         <ion-img [src]="event.imgSrc"></ion-img>
       </ion-thumbnail>
       <h2>{{ event.title }}</h2>
-      <p><ion-icon name="pin"></ion-icon> {{ event.location.name }}</p>
-      <p><ion-icon name="time"></ion-icon> {{ event.date }}</p>
+      <p><ion-icon name="pin"></ion-icon> {{ event.venue }}</p>
+      <p><ion-icon name="time"></ion-icon> {{ event.start_date }}</p>
     </ion-item>
   </ion-list>
 </ion-content>

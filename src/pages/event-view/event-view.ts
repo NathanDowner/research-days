@@ -14,13 +14,9 @@ export class EventViewPage {
     this.event = this.navParams.get("event");
   }
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad EventViewPage");
-  }
-
   findOnMap() {
     this.navCtrl.push(MapPage, {
-      coords: this.event.location.coords
+      coords: this.event.coords
     });
   }
 }

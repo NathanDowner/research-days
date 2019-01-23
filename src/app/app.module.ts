@@ -16,8 +16,8 @@ import { Geolocation } from "@ionic-native/geolocation";
 import { GoogleMaps } from "@ionic-native/google-maps";
 
 import { EventsProvider } from "../providers/events/events";
-import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
-import { InMemoryDataProvider } from "../providers/in-memory-data/in-memory-data";
+// import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
+// import { InMemoryDataProvider } from "../providers/in-memory-data/in-memory-data";
 import { HttpClientModule } from "@angular/common/http";
 import { JamnavProvider } from '../providers/jamnav/jamnav';
 
@@ -35,9 +35,9 @@ import { JamnavProvider } from '../providers/jamnav/jamnav';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataProvider, {
-      dataEncapsulation: false
-    })
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataProvider, {
+    //   dataEncapsulation: false
+    // })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -54,7 +54,7 @@ import { JamnavProvider } from '../providers/jamnav/jamnav';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     EventsProvider,
-    InMemoryDataProvider,
+    // InMemoryDataProvider,
     Geolocation,
     GoogleMaps,
     JamnavProvider

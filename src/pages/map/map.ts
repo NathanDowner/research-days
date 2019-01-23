@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { Platform, ToastController, NavParams } from "ionic-angular";
+import { Platform, ToastController, NavParams, Toast } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
+import { JamnavProvider } from "../../providers/jamnav/jamnav";
+import { Location } from "../../models/location";
 
 
 @Component({
@@ -9,6 +11,9 @@ import { Geolocation } from "@ionic-native/geolocation";
 })
 export class MapPage {
 
+
+  
+  placeName: string = "";
   map: google.maps.Map;
   locationArr: google.maps.Marker[];
   @ViewChild('map') mapRef: ElementRef;
@@ -16,7 +21,8 @@ export class MapPage {
   constructor(
     private geoLoc: Geolocation, 
     private plt: Platform, 
-    private toast: ToastController, 
+    private toast: ToastController,
+    private jamnav: JamnavProvider, 
     private navParams: NavParams) { 
       this.locationArr = [];
     }
@@ -42,8 +48,6 @@ export class MapPage {
     };
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-    // this.addMarker(location, "Map Center!");
-    //get user location
     
     if (navigator.geolocation) {
 
@@ -64,7 +68,10 @@ export class MapPage {
           this.map.panTo(yourLoc);
         },
         err => {
-          alert("Your location is not currently available.");
+          this.toast.create({
+            message: "Your location is not currently available.",
+            duration: 3500
+          }).present();
         },
         {enableHighAccuracy: true}
       );
@@ -102,21 +109,26 @@ export class MapPage {
     
   }
 
-  addListeneres() {
-    // this.map.
+  getLocation(location: string) {
+    console.log('get location called');
+    
+    this.jamnav.getLocationData(location).subscribe((data:Location) => {
+      console.log(`Data received: ${data}`);
+      this.addMarker(new google.maps.LatLng(data.geometry.coordinates[1], data.geometry.coordinates[0]),"Event");
+    }
+    // , err => console.log(`There was an error receiving the data: ${err}`)
+    );
   }
 
   addMarker(position: google.maps.LatLng, title: string) {
-    return new google.maps.Marker({
+    let marker = new google.maps.Marker({
       title: title,
       label: title,
       position: position,
       map: this.map
     });
+    this.map.panTo(position);
+    return marker;
   }
-
-
-
-
 
 }

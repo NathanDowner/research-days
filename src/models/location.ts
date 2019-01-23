@@ -1,5 +1,5 @@
 export interface Location {
   geometry: {
-    coordinates: number[]
+    coordinates: number[]//lng,lat
   }
 }

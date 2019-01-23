@@ -3,6 +3,7 @@ import { Platform, ToastController, NavParams, Toast } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
 import { JamnavProvider } from "../../providers/jamnav/jamnav";
 import { Location } from "../../models/location";
+import { JamnavResponse } from "../../models/jamnavResponse";
 
 
 @Component({
@@ -111,9 +112,9 @@ export class MapPage {
   getLocation(location: string) {
     console.log('get location called');
     
-    this.jamnav.getLocationData(location).subscribe((data:Location) => {
+    this.jamnav.getLocationData(location).subscribe((data:JamnavResponse) => {
       console.dir(data);
-      this.addMarker(new google.maps.LatLng(data.geometry.coordinates[1], data.geometry.coordinates[0]),"Event");
+      this.addMarker(new google.maps.LatLng(data.features[0].geometry.coordinates[1], data.features[0].geometry.coordinates[0]),"Event");
     }
     // , err => console.log(`There was an error receiving the data: ${err}`)
     );

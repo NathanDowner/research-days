@@ -13,12 +13,12 @@ export class JamnavProvider {
     console.log('Hello JamnavProvider Provider');
   }
 
-  getLocationData(location: string): Observable<Location> {
+  getLocationData(location: string): Observable<JamnavResponse> {
     let header: HttpHeaders = new HttpHeaders();
     header = header.set("Authorization", `Token ${this.key}`)
 
     let name:string = location.split(" ").join("+");
-    return this.http.get<Location>(this.url + name, {headers: header});
+    return this.http.get<JamnavResponse>(this.url + name, {headers: header});
   }
 
 }

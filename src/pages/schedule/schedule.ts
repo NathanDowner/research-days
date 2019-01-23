@@ -12,7 +12,7 @@ export class SchedulePage {
   events: Event[];
   filteredEvents: Event[];
 
-  filter: any = {
+  refineSearchFilter: any = {
     dates: [],
     faculty: "",
     department: "",
@@ -67,10 +67,10 @@ export class SchedulePage {
     this.isFiltering = !this.isFiltering;
     if (this.isFiltering) {
       // reset the filter
-      this.filter.dates = [];
-      this.filter.faculty = "";
-      this.filter.department = "";
-      this.filter.venue = "";
+      this.refineSearchFilter.dates = [];
+      this.refineSearchFilter.faculty = "";
+      this.refineSearchFilter.department = "";
+      this.refineSearchFilter.venue = "";
     }
   }
 
@@ -100,13 +100,13 @@ export class SchedulePage {
   }
 
   updateFilterDates(date: string): void {
-    const idx = this.filter.dates.indexOf(date);
+    const idx = this.refineSearchFilter.dates.indexOf(date);
     console.log(date);
     console.log(idx);
     if (idx === -1) {
-      this.filter.dates.push(date);
+      this.refineSearchFilter.dates.push(date);
     } else {
-      this.filter.dates.splice(idx, 1);
+      this.refineSearchFilter.dates.splice(idx, 1);
     }
   }
 
@@ -140,7 +140,7 @@ export class SchedulePage {
     }
 
     // filter for venue
-    if (filterObject.venue.length > 0) {
+    if (filterObject.venue && filterObject.venue.length > 0) {
       refinedResults = refinedResults.filter((event: Event) => {
         if (filterObject.venue) {
           return this.isInField(event.venue, filterObject.venue);
@@ -150,7 +150,7 @@ export class SchedulePage {
       });
     }
 
-    if (filterObject.faculty.length > 0) {
+    if (filterObject.faculty && filterObject.faculty.length > 0) {
       refinedResults = refinedResults.filter((event: Event) => {
         if (filterObject.faculty) {
           return this.isInField(event.faculty, filterObject.faculty);
@@ -161,7 +161,7 @@ export class SchedulePage {
     }
 
     // filter for department
-    if (filterObject.department.length > 0) {
+    if (filterObject.department && filterObject.department.length > 0) {
       refinedResults = refinedResults.filter((event: Event) => {
         if (filterObject.department) {
           return this.isInField(event.department, filterObject.department);

@@ -63,7 +63,9 @@
               <ion-label class="small-item">{{
                 date | date: "MMM dd"
               }}</ion-label>
-              <ion-checkbox (ionChange)="updateFilterDates(date)"></ion-checkbox>
+              <ion-checkbox
+                (ionChange)="updateFilterDates(date)"
+              ></ion-checkbox>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -72,7 +74,7 @@
       <ion-list-header> Faculty </ion-list-header>
       <ion-item>
         <ion-label>Choose one...</ion-label>
-        <ion-select [(ngModel)]="filter.faculty">
+        <ion-select [(ngModel)]="refineSearchFilter.faculty">
           <ion-option value="Science & Technology"
             >Science & Technology</ion-option
           >
@@ -88,7 +90,7 @@
       <ion-list-header> Venue </ion-list-header>
       <ion-item>
         <ion-label>Choose one...</ion-label>
-        <ion-select [(ngModel)]="filter.venue">
+        <ion-select [(ngModel)]="refineSearchFilter.venue">
           <ion-option value="Assembly Hall">Assembly Hall</ion-option>
           <ion-option value="Tent">Tent</ion-option>
           <ion-option value="Main Library">Main Library</ion-option>
@@ -96,7 +98,14 @@
         </ion-select>
       </ion-item>
     </ion-list>
-    <button ion-button full color="uwi" (click)="filterEvents(filter)">Search</button>
+    <button
+      ion-button
+      full
+      color="uwi"
+      (click)="filterEvents(refineSearchFilter)"
+    >
+      Search
+    </button>
   </ion-toolbar>
 </ion-header>
 

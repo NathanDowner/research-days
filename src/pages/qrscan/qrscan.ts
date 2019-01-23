@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 //QR Plugin
-import { QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
+import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 
 /**
  * Generated class for the QrscanPage page.
@@ -11,30 +11,42 @@ import { QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-qrscan',
   templateUrl: 'qrscan.html',
 })
 export class QrscanPage {
 
-  ionApp = document.getElementsByTagName("ion-app")[0];
+  ionApp;
 
-  width: number = 320;  // resulting snapshot width
-  height: number = 0;  // video input stream height (to be computed)
+  width: number;              // resulting snapshot width
+  height: number;             // video input stream height (to be computed)
 
-  streaming: boolean = false;  // Is there an active stream?
-  destroyed: boolean = false;  // Is the scanning instance destroyed?
+  streaming: boolean;         // Is there an active stream?
+  destroyed: boolean;         // Is the scanning instance destroyed?
 
   scanSub = null;
 
-  video: HTMLVideoElement = null;  // reference to video input stream (<video> element)
-  canvas: HTMLCanvasElement = null;  // reference to canvas used to store snapshots (<canvas> element)
-  photo: HTMLMediaElement = null;  // reference to the output image from scan (<img> element)
-  scanbutton: HTMLElement = null;  // reference to button that initiates scan (<button> element)
+  video: HTMLVideoElement;    // reference to video input stream (<video> element)
+  canvas: HTMLCanvasElement;  // reference to canvas used to store snapshots (<canvas> element)
+  photo: HTMLMediaElement;    // reference to the output image from scan (<img> element)
+  scanbutton: HTMLElement;    // reference to button that initiates scan (<button> element)
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private qrScanner: QRScanner) {
-    //this.scanCode();
+    this.ionApp = document.getElementsByTagName("ion-app")[0];
+
+    this.width = 320;  // resulting snapshot width
+    this.height = 0;  // video input stream height (to be computed)
+
+    this.streaming = false;  // Is there an active stream?
+    this.destroyed = false;  // Is the scanning instance destroyed?
+
+    this.scanSub = null;
+
+    this.video = null;  // reference to video input stream (<video> element)
+    this.canvas = null;  // reference to canvas used to store snapshots (<canvas> element)
+    this.photo = null;  // reference to the output image from scan (<img> element)
+    this.scanbutton = null;  // reference to button that initiates scan (<button> element)
   }
 
   /**
@@ -109,6 +121,7 @@ export class QrscanPage {
    * @param status
    */
   cameraView(status: boolean): void {
+
     if(status){
       this.ionApp.classList.add('cameraView');
       // window.document.querySelector('ion-app').classList.add('cameraView');
@@ -132,7 +145,6 @@ export class QrscanPage {
         this.destroyed = false;
         console.log("Error: ", e);
       });
-
   }
 
 
@@ -147,7 +159,6 @@ export class QrscanPage {
   }
 
   ionViewWillLeave(){
-
     console.log('ionViewWillLeave QrscanPage');
     //this.qrScanner.destroy().then((s) => { console.log("DESTROY")}).catch((e) => { console.log("Error: ", e)});
     // this.qrScanner = null;

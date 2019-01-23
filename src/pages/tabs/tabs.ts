@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Platform } from "ionic-angular";
 
 import { MapPage } from "../map/map";
 import { SchedulePage } from "../schedule/schedule";
@@ -13,8 +14,15 @@ import {QrscanAngPage} from "../qrscan-ang/qrscan-ang";
 export class TabsPage {
   tab1Root = HomePage;
   tab2Root = MapPage;
-  tab3Root = QrscanAngPage;
+  tab3Root = QrReaderPage;
   tab4Root = SchedulePage;
 
-  constructor() {}
+  is_iOS: boolean;
+
+  constructor(platform: Platform) {
+    console.log(platform.platforms());
+    for(let i of platform.platforms()){
+      alert(i);
+    }
+  }
 }

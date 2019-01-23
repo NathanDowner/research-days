@@ -12,12 +12,11 @@ import { TabsPage } from "../pages/tabs/tabs";
 import { QrscanPage } from "../pages/qrscan/qrscan";
 import { QrscanAngPage } from "../pages/qrscan-ang/qrscan-ang";
 
+//Other
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { EventsProvider } from "../providers/events/events";
-import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
-import { InMemoryDataProvider } from "../providers/in-memory-data/in-memory-data";
 import { HttpClientModule } from "@angular/common/http";
 
 //plugins
@@ -44,9 +43,6 @@ import { PostersProvider } from '../providers/posters/posters';
     NgQrScannerModule,
     ZXingScannerModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataProvider, {
-      dataEncapsulation: false
-    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -66,7 +62,6 @@ import { PostersProvider } from '../providers/posters/posters';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EventsProvider,
-    InMemoryDataProvider,
     InAppBrowser,
     PostersProvider,
   ]

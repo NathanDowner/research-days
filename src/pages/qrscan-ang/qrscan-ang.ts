@@ -1,5 +1,5 @@
 import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import { NavController, NavParams} from 'ionic-angular';
 
 import {QrScannerComponent} from "angular2-qrscanner";
 
@@ -10,7 +10,6 @@ import {QrScannerComponent} from "angular2-qrscanner";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-qrscan-ang',
   templateUrl: 'qrscan-ang.html',

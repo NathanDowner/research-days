@@ -1,7 +1,11 @@
+// Native Components
 import {Component, ViewChild} from "@angular/core";
 import {NavController} from "ionic-angular";
+import { Platform } from "ionic-angular";
 
+//Providers
 import { PostersProvider } from "../../providers/posters/posters";
+
 //Barcode format
 import BarcodeFormat from "@zxing/library/esm5/core/BarcodeFormat";
 
@@ -34,22 +38,31 @@ export class QrReaderPage {
   width: string;                          // width of scanner camera preview space
   height: string;                         // width of scanner camera preview space
 
-  // Browser
+  // In-App Browser
   browser: InAppBrowserObject;
+
+  // Device
+  is_iOS: boolean;
+
 
   /**
    * Constructor
    * @param navCtrl
    * @param iab
+   * @param posters
+   * @param platform
    * @constructor
    */
-  constructor(public navCtrl: NavController, private iab: InAppBrowser, private posters: PostersProvider) {
+  constructor(public navCtrl: NavController, private iab: InAppBrowser, private posters: PostersProvider, private platform: Platform) {
     this.allowedFormats = [BarcodeFormat.QR_CODE];
     this.hasCameras = false;
     this.scannerEnabled = false;
     this.autofocus = true;
     this.width = innerWidth.toString();
     this.height = innerHeight.toString();
+
+    this.is_iOS = this.platform.is("ios");
+    console.log("iOS: ", this.is_iOS);
   }
 
 
@@ -64,24 +77,37 @@ export class QrReaderPage {
       this.hasCameras = true;  // The device has cameras
       this.availableDevices = devices;  // all available devices stored in this variable
 
-      // selects the devices's back camera by default
-      for (const device of devices) {
-        console.log(device.label);
+      if(devices.length !== 0){
+
+        // selects the devices's back camera by default
+        for (const device of devices) {
+          console.log(device.label);
           if (/back|rear|environment/gi.test(device.label)) {
-              this.scanner.changeDevice(device);  // changes device the scanner uses
-              this.selectedDevice = device;
-              break;
+            this.scanner.changeDevice(device);  // changes device the scanner uses
+            this.selectedDevice = device;
+            break;
           }
-      }
+        }
 
-      // selects first available device if no back camera found
-      if(!this.selectedDevice){
-        this.selectedDevice = this.availableDevices[0];
+        // selects first available device if no back camera found
+        if(!this.selectedDevice){
+          this.selectedDevice = this.availableDevices[0];
+        }
+      } else {
+        alert("NO DEVICES!!");
       }
-
       console.log(this.selectedDevice);
       console.log(devices);
+      this.hasDevice();
     });
+  }
+
+  hasDevice(): void {
+    this.scanner.hasDevices.subscribe((status) => {
+      alert(status);
+      console.log("Has device: ", status);
+    });
+    console.log(this.scanner.hasDevices);
   }
 
 
@@ -142,12 +168,6 @@ export class QrReaderPage {
       (err) => { console.log(err)},
       () => { console.log("posters loaded w/ Http")}
     );
-
-    // this.posters.getPostersAjax().subscribe(
-    //   (data) => { console.log(data) },
-    //   (err) => { console.log(err)},
-    //   () => { console.log("posters loaded w/ AJAX")}
-    // )
   }
 
 

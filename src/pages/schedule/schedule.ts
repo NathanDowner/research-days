@@ -3,7 +3,6 @@ import { NavController } from "ionic-angular";
 import { EventsProvider } from "../../providers/events/events";
 import { EventViewPage } from "../event-view/event-view";
 import { Event } from "../../models/event";
-import { Filter } from "../../models/filter";
 
 @Component({
   selector: "page-schedule",
@@ -13,7 +12,7 @@ export class SchedulePage {
   events: Event[];
   filteredEvents: Event[];
 
-  filter: Filter = {
+  filter: any = {
     dates: [],
     faculty: "",
     department: "",
@@ -100,10 +99,22 @@ export class SchedulePage {
     );
   }
 
-  filterEvents(filterObject: Filter): void {
+  updateFilterDates(date: string): void {
+    const idx = this.filter.dates.indexOf(date);
+    console.log(date);
+    console.log(idx);
+    if (idx === -1) {
+      this.filter.dates.push(date);
+    } else {
+      this.filter.dates.splice(idx, 1);
+    }
+  }
+
+  filterEvents(filterObject: any): void {
     console.log(filterObject);
     let refinedResults: Event[] = this.events;
 
+    // filter for dates
     if (filterObject.dates.length > 0) {
       if (filterObject.dates[0].toString().toLowerCase() === "all") {
         this.filteredEvents = this.events;
@@ -124,18 +135,41 @@ export class SchedulePage {
       }
       // apply each filter incrementally to the results array
       refinedResults = refinedResults.filter((event: Event) => {
-        console.log(filterObject.dates[0]);
-        console.log(event.start_date);
-        return event.start_date === filterObject.dates[0];
+        return filterObject.dates.indexOf(event.start_date) != -1;
       });
     }
-    refinedResults = refinedResults.filter((event: Event) => {
-      if (filterObject.venue) {
-        return this.isInField(event.venue, filterObject.venue);
-      }
-      // if no filter for venue is specified just pass it
-      return true;
-    });
+
+    // filter for venue
+    if (filterObject.venue.length > 0) {
+      refinedResults = refinedResults.filter((event: Event) => {
+        if (filterObject.venue) {
+          return this.isInField(event.venue, filterObject.venue);
+        }
+        // if no filter for venue is specified just pass it
+        return true;
+      });
+    }
+
+    if (filterObject.faculty.length > 0) {
+      refinedResults = refinedResults.filter((event: Event) => {
+        if (filterObject.faculty) {
+          return this.isInField(event.faculty, filterObject.faculty);
+        }
+        // if no filter for faculty is specified just pass it
+        return true;
+      });
+    }
+
+    // filter for department
+    if (filterObject.department.length > 0) {
+      refinedResults = refinedResults.filter((event: Event) => {
+        if (filterObject.department) {
+          return this.isInField(event.department, filterObject.department);
+        }
+        // if no filter for department is specified just pass it
+        return true;
+      });
+    }
 
     this.filteredEvents = refinedResults;
   }

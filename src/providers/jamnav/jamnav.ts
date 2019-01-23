@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Location } from '../../models/location';
 import { Observable } from 'rxjs';
+import { JamnavResponse } from '../../models/jamnavResponse';
 
 @Injectable()
 export class JamnavProvider {

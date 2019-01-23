@@ -12,7 +12,6 @@ import { Location } from "../../models/location";
 export class MapPage {
 
 
-  
   placeName: string = "";
   map: google.maps.Map;
   locationArr: google.maps.Marker[];
@@ -113,7 +112,7 @@ export class MapPage {
     console.log('get location called');
     
     this.jamnav.getLocationData(location).subscribe((data:Location) => {
-      console.log(`Data received: ${data}`);
+      console.dir(data);
       this.addMarker(new google.maps.LatLng(data.geometry.coordinates[1], data.geometry.coordinates[0]),"Event");
     }
     // , err => console.log(`There was an error receiving the data: ${err}`)

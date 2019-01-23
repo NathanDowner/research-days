@@ -1,9 +1,5 @@
-import { Component, ViewChild, ElementRef, destroyPlatform } from "@angular/core";
+import { Component, ViewChild, ElementRef } from "@angular/core";
 import { Platform, ToastController, NavParams, Toast } from "ionic-angular";
-import { Geolocation } from "@ionic-native/geolocation";
-import { JamnavProvider } from "../../providers/jamnav/jamnav";
-import { JamnavResponse } from "../../models/jamnavResponse";
-
 
 @Component({
   selector: "page-map",
@@ -18,16 +14,14 @@ export class MapPage {
 
   constructor(
     private plt: Platform, 
-    private toast: ToastController,
-    private jamnav: JamnavProvider, 
+    private toast: ToastController, 
     private navParams: NavParams) { 
       this.locationArr = [];
       this.mapCenter = new google.maps.LatLng(18.006168, -76.746955);
     }
 
   ionViewDidLoad() {
-    this.plt.ready().then(_ => {
-      // this.prepareBrowser();
+    this.plt.ready().then(() => {
       this.loadMap();
       
     })
@@ -36,9 +30,6 @@ export class MapPage {
   }
 
   loadMap() {
-
-    //location
-    // const mapCenter = ;
 
     const options = {
       center: this.mapCenter,
@@ -77,24 +68,14 @@ export class MapPage {
 
     }
   
-    //for event being passed
+    this.getPassedEvent()
+  }
+
+  getPassedEvent() {
     let evInfo = this.navParams.get('eventInfo');
     if (evInfo) {
       this.addMarker(new google.maps.LatLng(evInfo.lat, evInfo.lng),evInfo.title, "yes");
     }
-
-    
-  }
-
-  getLocation(location: string) {
-    console.log('get location called');
-    
-    this.jamnav.getLocationData(location).subscribe((data:JamnavResponse) => {
-      console.dir(data);
-      this.addMarker(new google.maps.LatLng(data.features[0].geometry.coordinates[1], data.features[0].geometry.coordinates[0]),"Event");
-    }
-    // , err => console.log(`There was an error receiving the data: ${err}`)
-    );
   }
 
   addMarker(position: google.maps.LatLng, title: string, canAnimate?: string) {

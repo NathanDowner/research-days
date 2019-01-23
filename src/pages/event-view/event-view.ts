@@ -22,7 +22,7 @@ export class EventViewPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventViewPage');
-    this.makeApiCall(this.event.venue);
+    this.makeApiCall(this.event.Venue);
 
   }
 
@@ -37,7 +37,7 @@ export class EventViewPage {
   findOnMap() {
     this.navCtrl.push(MapPage, {
       eventInfo: {
-        title: this.event.title,
+        title: this.event.Type,
         lat: this.location.geometry.coordinates[1],
         lng: this.location.geometry.coordinates[0],
       }

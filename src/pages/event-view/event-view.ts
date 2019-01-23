@@ -4,6 +4,7 @@ import { MapPage } from '../map/map';
 import { Event } from '../../models/Event';
 import { JamnavProvider } from '../../providers/jamnav/jamnav';
 import { Location } from '../../models/location';
+import { JamnavResponse } from '../../models/jamnavResponse';
 
 @IonicPage()
 @Component({
@@ -21,17 +22,16 @@ export class EventViewPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventViewPage');
+    this.makeApiCall(this.event.venue);
 
   }
 
-  makeApiCall() {
-    this.jamnav.getLocationData(this.event.venue)
+  makeApiCall(location: string) {
+    this.jamnav.getLocationData(location)
       .subscribe(
-        data => this.location = data, 
+        (data: JamnavResponse) => this.location = data.features[0], 
         error => console.log(`Error in receiving data: ${error}`)
       );
-    console.log('made API call');
-    console.log(this.location); 
   }
 
   findOnMap() {

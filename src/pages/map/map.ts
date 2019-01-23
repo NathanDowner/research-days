@@ -1,8 +1,7 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component, ViewChild, ElementRef, destroyPlatform } from "@angular/core";
 import { Platform, ToastController, NavParams, Toast } from "ionic-angular";
 import { Geolocation } from "@ionic-native/geolocation";
 import { JamnavProvider } from "../../providers/jamnav/jamnav";
-import { Location } from "../../models/location";
 import { JamnavResponse } from "../../models/jamnavResponse";
 
 
@@ -12,19 +11,18 @@ import { JamnavResponse } from "../../models/jamnavResponse";
 })
 export class MapPage {
 
-
-  placeName: string = "";
   map: google.maps.Map;
+  mapCenter: google.maps.LatLng;
   locationArr: google.maps.Marker[];
   @ViewChild('map') mapRef: ElementRef;
 
   constructor(
-    private geoLoc: Geolocation, 
     private plt: Platform, 
     private toast: ToastController,
     private jamnav: JamnavProvider, 
     private navParams: NavParams) { 
       this.locationArr = [];
+      this.mapCenter = new google.maps.LatLng(18.006168, -76.746955);
     }
 
   ionViewDidLoad() {
@@ -40,10 +38,10 @@ export class MapPage {
   loadMap() {
 
     //location
-    const location = new google.maps.LatLng(18.006168, -76.746955);
+    // const mapCenter = ;
 
     const options = {
-      center: location,
+      center: this.mapCenter,
       zoom: 15
     };
 
@@ -63,47 +61,26 @@ export class MapPage {
           
           }
           let yourLoc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-          let marker = this.addMarker(yourLoc, "your location");
+          let marker = this.addMarker(yourLoc, "your location","noAnimation");
           this.locationArr.push(marker);
           this.map.panTo(yourLoc);
         },
         err => {
           this.toast.create({
             message: "Your location is not currently available.",
-            duration: 3500
+            duration: 3500,
+            position: "top"
           }).present();
         },
         {enableHighAccuracy: true}
       );
-      // let pos = navigator.geolocation.getCurrentPosition(
-      //   pos => {
-      //     let geo = {
-      //       lat: pos.coords.latitude,
-      //       lng: pos.coords.longitude
-      //     }
-      //     this.addMarker(new google.maps.LatLng(geo.lat, geo.lng), "Your location");
-      //   }
-      // );
+
     }
-    // this.geoLoc.getCurrentPosition({enableHighAccuracy: true}).then(pos =>{
-
-    //   let geo = {
-    //     lat: pos.coords.latitude,
-    //     lng: pos.coords.longitude
-    //   }
-
-    //   // alert(`lat:${geo.lat}, lng: ${geo.lng}`)
-    //   this.addMarker(new google.maps.LatLng(geo.lat, geo.lng), "Your location");
-
-    // }).catch((error) => {
-    //   console.log('Error getting location', error);
-    // });
-
-
+  
     //for event being passed
     let evInfo = this.navParams.get('eventInfo');
     if (evInfo) {
-
+      this.addMarker(new google.maps.LatLng(evInfo.lat, evInfo.lng),evInfo.title, "yes");
     }
 
     
@@ -120,14 +97,17 @@ export class MapPage {
     );
   }
 
-  addMarker(position: google.maps.LatLng, title: string) {
+  addMarker(position: google.maps.LatLng, title: string, canAnimate?: string) {
+    this.map.panTo(position);
     let marker = new google.maps.Marker({
       title: title,
       label: title,
       position: position,
       map: this.map
     });
-    this.map.panTo(position);
+    if(canAnimate === "yes") {
+      marker.setAnimation(google.maps.Animation.DROP);
+    }
     return marker;
   }
 

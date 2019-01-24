@@ -1,3 +1,14 @@
-page-contact {
+page-qr-reader {
+
+  ion-content{
+
+    .cameraView{
+      background: transparent none !important;
+    }
+
+    /** style camera preview */
+    #scanner{
+    }
+  }
 
 }

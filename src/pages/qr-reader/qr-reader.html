@@ -1,5 +1,19 @@
 <ion-header>
-  <ion-navbar> <ion-title> Scan QR </ion-title> </ion-navbar>
+  <ion-navbar>
+    <ion-title> Scan QR </ion-title>
+  </ion-navbar>
+
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content id="scanContainer">
+  <zxing-scanner
+    #scanner
+    id="scanner"
+    [formats]="allowedFormats"
+    [scannerEnabled]="scannerEnabled"
+    [autofocusEnabled]="autofocus"
+    [device]="selectedDevice"
+    (scanSuccess)="handleScan($event)"
+    >
+  </zxing-scanner>
+</ion-content>

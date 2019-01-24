@@ -76,7 +76,7 @@ export class QrReaderPage {
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
       this.hasCameras = true;  // The device has cameras
       this.availableDevices = devices;  // all available devices stored in this variable
-
+      alert(devices.length);
       if(devices.length !== 0){
 
         // selects the devices's back camera by default

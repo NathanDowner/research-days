@@ -8,13 +8,15 @@ import { QrReaderPage } from "../pages/qr-reader/qr-reader";
 import { HomePage } from "../pages/home/home";
 import { MapPage } from "../pages/map/map";
 import { TabsPage } from "../pages/tabs/tabs";
+import { EventViewPage } from "../pages/event-view/event-view";
 
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
+import { Geolocation } from "@ionic-native/geolocation";
 
 import { EventsProvider } from "../providers/events/events";
 import { HttpClientModule } from "@angular/common/http";
-import { EventViewPage } from "../pages/event-view/event-view";
+import { JamnavProvider } from '../providers/jamnav/jamnav';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,11 @@ import { EventViewPage } from "../pages/event-view/event-view";
     TabsPage,
     EventViewPage
   ],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
+  ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -41,7 +47,9 @@ import { EventViewPage } from "../pages/event-view/event-view";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EventsProvider
+    EventsProvider,
+    Geolocation,
+    JamnavProvider
   ]
 })
 export class AppModule {}

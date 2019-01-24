@@ -27,9 +27,9 @@ export class SchedulePage {
     "All",
     "Today",
     "Tomorrow",
-    "2019-02-06",
-    "2019-02-07",
-    "2019-02-08"
+    "2018-02-06",
+    "2018-02-07",
+    "2018-02-08"
   ];
 
   constructor(
@@ -85,7 +85,7 @@ export class SchedulePage {
 
   isInEvent(event: Event, searchString: string): boolean {
     return (
-      this.isInField(event.title, searchString) ||
+      // this.isInField(event.title, searchString) ||
       this.isInField(event.venue, searchString) ||
       this.isInField(event.details, searchString)
     );
@@ -135,7 +135,8 @@ export class SchedulePage {
       }
       // apply each filter incrementally to the results array
       refinedResults = refinedResults.filter((event: Event) => {
-        return filterObject.dates.indexOf(event.start_date) != -1;
+        console.log(event.start_date.split(" ")[0]);
+        return filterObject.dates.indexOf(event.start_date.split(" ")[0]) != -1;
       });
     }
 

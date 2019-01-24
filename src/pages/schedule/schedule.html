@@ -122,7 +122,7 @@
       </ion-thumbnail>
       <h2>{{ event.title }}</h2>
       <p><ion-icon name="pin"></ion-icon> {{ event.venue }}</p>
-      <p><ion-icon name="time"></ion-icon> {{ event.start_date }}</p>
+      <p><ion-icon name="time"></ion-icon> {{ event.start_date | date:"MMM dd @hh:mm" }}</p>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -13,7 +13,6 @@ import { EventViewPage } from "../pages/event-view/event-view";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { Geolocation } from "@ionic-native/geolocation";
-import { GoogleMaps } from "@ionic-native/google-maps";
 
 import { EventsProvider } from "../providers/events/events";
 import { HttpClientModule } from "@angular/common/http";
@@ -50,7 +49,6 @@ import { JamnavProvider } from '../providers/jamnav/jamnav';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     EventsProvider,
     Geolocation,
-    GoogleMaps,
     JamnavProvider
   ]
 })

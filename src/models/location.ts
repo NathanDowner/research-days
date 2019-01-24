@@ -7,7 +7,7 @@ export interface Location {
   };
   "properties": {
       "name": string;
-      "categories": [];
+      // "categories": [];
       "phone_number": string;
       "address": string;
       "parish": {

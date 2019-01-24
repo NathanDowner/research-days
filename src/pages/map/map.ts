@@ -33,7 +33,8 @@ export class MapPage {
 
     const options = {
       center: this.mapCenter,
-      zoom: 15
+      zoom: 15,
+      fullScreenControl: false
     };
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options);

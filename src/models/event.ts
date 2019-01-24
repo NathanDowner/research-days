@@ -1,18 +1,16 @@
 export interface Event {
-  id: number;
-  title: string;
-  host: string;
-  startTime: string;
-  endTime: string;
+  id: string;
+  start_date: string;
+  title?: string;
+  type: string;
+  details: string;
+  faculty?: string;
+  department?: string;
   imgSrc: string;
+  link: string;
   venue: string;
-  speaker: string;
-  description: string;
-  location: {
-    name: string;
-    coords: {
-      lat: number;
-      lon: number;
-    };
+  coords?: {
+    lat: number;
+    lon: number;
   };
 }

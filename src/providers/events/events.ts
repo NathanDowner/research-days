@@ -7,7 +7,8 @@ import { Event } from "../../models/Event";
 
 @Injectable()
 export class EventsProvider {
-  private eventsUrl = "api/events";
+  private eventsUrl =
+    "https://www.mona.uwi.edu/researchdays/api/views/schedule?display_id=services_1&limit=10&offset=0&filters[taxonomy_vocabulary_2_tid]=2018";
 
   constructor(private http: HttpClient) {}
 

@@ -1,25 +1,128 @@
 <ion-header>
-  <ion-navbar> <ion-title>Schedule</ion-title> </ion-navbar>
-  <ion-searchbar
-    placeholder="Search for an event.."
-    [(ngModel)]="searchTerm"
-    (ionInput)="findEvents()"
-  ></ion-searchbar>
+  <ion-navbar>
+    <ion-searchbar
+      #searchbar
+      animated="true"
+      placeholder="Search For An Event..."
+      [(ngModel)]="searchTerm"
+      (ionInput)="findEvents()"
+      (ionFocus)="toggleIsSearching()"
+      (ionBlur)="toggleIsSearching()"
+    ></ion-searchbar>
+    <ion-buttons end>
+      <button ion-button (click)="toggleIsFiltering()">
+        <ion-icon
+          class="filter-icon"
+          name="{{ !isFiltering ? 'funnel' : 'close-circle' }}"
+          color="light"
+        ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar
+    *ngIf="!isSearching && !isFiltering"
+    class="scrollable-segments"
+    no-border
+    padding-horizontal
+  >
+    <button
+      ion-button
+      icon-start
+      round
+      class="date-filter"
+      color="danger"
+      *ngFor="let filter of (dateFilters | slice: 0:3)"
+      (click)="filterEvents({ dates: [filter] })"
+      small
+    >
+      <ion-icon name="calendar"></ion-icon>
+      {{ filter }}
+    </button>
+    <button
+      ion-button
+      icon-start
+      round
+      class="date-filter"
+      color="danger"
+      *ngFor="let filter of (dateFilters | slice: 3)"
+      (click)="filterEvents({ dates: [filter] })"
+      small
+    >
+      <ion-icon name="calendar"></ion-icon>
+      {{ filter | date: "MMM dd" }}
+    </button>
+  </ion-toolbar>
+  <ion-toolbar color="light" *ngIf="isFiltering">
+    <ion-list>
+      <ion-list-header> Date </ion-list-header>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4 *ngFor="let date of (dateFilters | slice: 3)">
+            <ion-item>
+              <ion-label class="small-item">{{
+                date | date: "MMM dd"
+              }}</ion-label>
+              <ion-checkbox
+                (ionChange)="updateFilterDates(date)"
+              ></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-list-header> Faculty </ion-list-header>
+      <ion-item>
+        <ion-label>Choose one...</ion-label>
+        <ion-select [(ngModel)]="refineSearchFilter.faculty">
+          <ion-option value="Science & Technology"
+            >Science & Technology</ion-option
+          >
+          <ion-option value="Social Sciences">Social Sciences</ion-option>
+          <ion-option value="Humanities & Education"
+            >Humanities & Education</ion-option
+          >
+          <ion-option value="Medical Sciences">Medical Sciences</ion-option>
+          <ion-option value="Engineering">Engineering</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-list-header> Venue </ion-list-header>
+      <ion-item>
+        <ion-label>Choose one...</ion-label>
+        <ion-select [(ngModel)]="refineSearchFilter.venue">
+          <ion-option value="Assembly Hall">Assembly Hall</ion-option>
+          <ion-option value="Tent">Tent</ion-option>
+          <ion-option value="Main Library">Main Library</ion-option>
+          <ion-option value="Undercroft">The Undercroft</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <button
+      ion-button
+      full
+      color="uwi"
+      (click)="filterEvents(refineSearchFilter)"
+    >
+      Search
+    </button>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-item
-    *ngFor="let event of filterEvents"
-    (click)="showEventPage(event)"
-    text-wrap
-    margin-bottom
-  >
-    <ion-thumbnail item-start> <img src="{{ event.imgSrc }}" /> </ion-thumbnail>
-    <h2>{{ event.title }}</h2>
-    <p><ion-icon name="compass"></ion-icon> {{ event.venue }}</p>
-    <p>
-      <ion-icon name="time"></ion-icon> {{ event.startTime }} -
-      {{ event.endTime }}
-    </p>
-  </ion-item>
+  <ion-list [virtualScroll]="filteredEvents" approxItemHeight="100px">
+    <ion-item
+      *virtualItem="let event"
+      (click)="showEventPage(event)"
+      text-wrap
+      margin-bottom
+    >
+      <ion-thumbnail item-start>
+        <ion-img [src]="event.imgSrc"></ion-img>
+      </ion-thumbnail>
+      <h2>{{ event.title }}</h2>
+      <p><ion-icon name="pin"></ion-icon> {{ event.venue }}</p>
+      <p><ion-icon name="time"></ion-icon> {{ event.start_date | date:"MMM dd @hh:mm" }}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

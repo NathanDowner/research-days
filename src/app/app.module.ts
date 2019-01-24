@@ -13,8 +13,6 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { EventsProvider } from "../providers/events/events";
-import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
-import { InMemoryDataProvider } from "../providers/in-memory-data/in-memory-data";
 import { HttpClientModule } from "@angular/common/http";
 import { EventViewPage } from "../pages/event-view/event-view";
 
@@ -28,14 +26,7 @@ import { EventViewPage } from "../pages/event-view/event-view";
     TabsPage,
     EventViewPage
   ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataProvider, {
-      dataEncapsulation: false
-    })
-  ],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp), HttpClientModule],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -50,8 +41,7 @@ import { EventViewPage } from "../pages/event-view/event-view";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EventsProvider,
-    InMemoryDataProvider
+    EventsProvider
   ]
 })
 export class AppModule {}

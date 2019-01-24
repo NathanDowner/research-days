@@ -1,15 +1,19 @@
-img {
-  border-radius: 15px;
+ion-toolbar.scrollable-segments {
+  overflow-x: scroll;
+  white-space: nowrap;
+  background: $uwi-red;
 }
 
-h2 {
-  font-size: 50px;
+ion-toolbar button.date-filter {
+  margin: 0 4px;
 }
 
-ion-icon {
-  opacity: 0.6;
+ion-toolbar ion-buttons button {
+  font-size: 8px;
 }
 
-ion-searchbar {
-  background: #f53d3d;
+ion-label.small-item {
+  font-size: 12px;
 }
+
+$checkbox-ios-icon-size: 16px;

@@ -28,31 +28,44 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
+$uwi-red: #ce1111;
+$uwi-white: #fff;
+
 $colors: (
   primary: #488aff,
   secondary: #32db64,
   danger: #f53d3d,
   light: #f4f4f4,
-  dark: #222
+  dark: #222,
+  uwi: #ce1111d7
 );
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-$tabs-ios-tab-color-active: #f53d3d;
-$searchbar-ios-background-color: #f53d3d;
+$tabs-ios-tab-color-active: $uwi-red;
+$searchbar-ios-input-text-color: $uwi-white;
+$searchbar-ios-input-placeholder-color: $uwi-white;
+$searchbar-ios-input-search-icon-color: $uwi-white;
+$searchbar-ios-input-clear-icon-color: $uwi-white;
+$segment-button-ios-border-color-activated: $uwi-white;
+$segment-button-ios-text-color-activated: $uwi-white;
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 // App Windows Variables
 // --------------------------------------------------
-$tabs-md-tab-color-active: #f53d3d;
-$searchbar-md-background-color: #f53d3d;
+$tabs-md-tab-color-active: $uwi-red;
+$searchbar-md-background-color: $uwi-red;
+$segment-button-md-border-color-activated: $uwi-white;
+$segment-button-md-text-color-activated: $uwi-white;
 // Windows only Sass variables can go here
 // App Theme
 // --------------------------------------------------
-$tabs-wp-tab-color-active: #f53d3d;
-$searchbar-wp-background-color: #f53d3d;
+$tabs-wp-tab-color-active: $uwi-red;
+$searchbar-wp-background-color: $uwi-red;
+$segment-button-wp-border-color-activated: $uwi-white;
+$segment-button-wp-text-color-activated: $uwi-white;
 // Ionic apps can have different themes applied, which can
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's

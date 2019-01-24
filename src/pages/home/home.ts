@@ -11,4 +11,7 @@ export class HomePage {
 
   }
 
+  goToSchedule() {
+    this.navCtrl.parent.select(3);
+  }
 }

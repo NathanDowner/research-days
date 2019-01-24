@@ -1,7 +1,58 @@
 <ion-header>
-
+  <img src="../../assets/imgs/banner_2019.jpg" alt="">
 </ion-header>
 <ion-content>
 
+<ion-content padding>
+  <ion-grid justify-content-center>
+    <h3 class="title" text-center>Driving Research For Social And Economical Development!</h3>
+    <ion-card>
+      <ion-card-header text-center>Live Stream</ion-card-header>
+      
+      <iframe 
+      src="https://www.youtube.com/embed/videoseries?list=PLtKjv92L0ihD_Hre-d12JihnQ_BanTD7c" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen></iframe>
+      <ion-card-content>
+        <p>Watch our coverage of research days straight from out youtube channel!</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-row margin-top>
+    </ion-row>
+    
+    <ion-card text-center margin-top>
+      <ion-card-header>Follow us!</ion-card-header>
+      <ion-card-content>
+        <div class="social-media">
+
+          <div class="item">
+            <a href="https://www.instagram.com/UWIRESEARCHDAYS/">
+              <ion-icon name="logo-instagram"></ion-icon>
+              <p>Instagram</p>
+            </a>
+          </div>
+
+          <div class="item">
+            <a href="https://www.facebook.com/UWIMonaResearchDays/">
+              <ion-icon name="logo-facebook"></ion-icon>
+              <p>Facebook</p>
+            </a>
+          </div>
+
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    
+      <button ion-item (click)="goToSchedule()" margin-top>Go to Schedule
+        <ion-icon item-end name="arrow-forward"></ion-icon>
+      </button>
+    
+  
+
+  </ion-grid>
+  
 </ion-content>
 

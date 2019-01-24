@@ -22,7 +22,7 @@ export class TabsPage {
   constructor(platform: Platform) {
     console.log(platform.platforms());
     for(let i of platform.platforms()){
-      alert(i);
+      // alert(i);
     }
   }
 }

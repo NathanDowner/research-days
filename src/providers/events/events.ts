@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { of } from "rxjs/observable/of";
 import { tap, catchError } from "rxjs/operators";
-import { Event } from "../../models/Event";
+import { Event } from "../../models/event";
 
 @Injectable()
 export class EventsProvider {

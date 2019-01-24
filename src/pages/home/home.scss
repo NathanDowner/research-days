@@ -5,7 +5,7 @@ page-home {
     // margin-top: 20vh;
 
     .title {
-      color: map-get($colors, "danger");
+      color: $uwi-red;
     }
 
     ion-card-header{ 
@@ -23,18 +23,16 @@ page-home {
       justify-content: space-around;
 
       p {
-        color: map-get($colors, "danger");
+        color: $uwi-red;
         text-decoration: none;
       }
-    
-      
       
     }
 
     ion-icon {
       font-size: 2.0em;
       display: block;
-      color: map-get($colors, "danger");
+      color: $uwi-red;
       
     }
   }

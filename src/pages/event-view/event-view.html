@@ -19,7 +19,8 @@
         <button ion-button outline round color="danger" (click)="findOnMap()" *ngIf="location">Locate</button>
       </ion-col>
     </ion-row>
-    <h4>Details</h4>
-    <p>{{ event.details }}</p>
+
+    <h3 id="details">Details</h3>
+    <div [innerHTML]="event.details"></div>
   </div>
 </ion-content>

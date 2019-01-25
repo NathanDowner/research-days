@@ -14,6 +14,10 @@ page-home {
       color: $uwi-red;
     }
 
+    ion-card .frame {
+      display: flex;
+      justify-content: center;
+    }
     ion-card-header{ 
       font-weight: 900;
     }
@@ -31,6 +35,7 @@ page-home {
       p {
         color: $uwi-red;
         text-decoration: none;
+        
       }
       
     }

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { Platform, ToastController, NavParams, Toast } from "ionic-angular";
+import { Platform, ToastController, NavParams } from "ionic-angular";
 
 @Component({
   selector: "page-map",
@@ -40,6 +40,14 @@ export class MapPage {
     this.map = new google.maps.Map(this.mapRef.nativeElement, options);
     
     if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        p => {
+          this.map.panTo(new google.maps.LatLng(p.coords.latitude, p.coords.longitude));
+          this.map.setZoom(12);
+
+        }
+      );
+
 
       navigator.geolocation.watchPosition(
 
@@ -55,7 +63,6 @@ export class MapPage {
           let yourLoc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
           let marker = this.addMarker(yourLoc, "your location","noAnimation");
           this.locationArr.push(marker);
-          this.map.panTo(yourLoc);
         },
         err => {
           this.toast.create({
@@ -64,12 +71,13 @@ export class MapPage {
             position: "top"
           }).present();
         },
-        {enableHighAccuracy: true}
+        {enableHighAccuracy: true,
+        maximumAge: 3000}
       );
 
+      this.getPassedEvent()
     }
   
-    this.getPassedEvent()
   }
 
   getPassedEvent() {

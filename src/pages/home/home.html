@@ -6,16 +6,18 @@
 <ion-content padding>
   <ion-grid justify-content-center>
     <h3 class="title" text-center>Driving Research For Social And Economical Development!</h3>
-    <ion-card>
+    <ion-card justify-content-center>
       <ion-card-header text-center>Live Stream</ion-card-header>
-      
-      <iframe 
-      src="https://www.youtube.com/embed/videoseries?list=PLtKjv92L0ihD_Hre-d12JihnQ_BanTD7c" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen></iframe>
+      <ion-row class="frame">
+        <iframe 
+        src="https://www.youtube.com/embed/videoseries?list=PLLzFJW3AmqUvUsM1WO0L0v7or-aRCOlSj" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen></iframe>
+
+      </ion-row>
       <ion-card-content>
-        <p>Watch our coverage of research days straight from out youtube channel!</p>
+        <p>Watch last year's coverage of Research Days!</p>
       </ion-card-content>
     </ion-card>
 
@@ -45,13 +47,9 @@
       </ion-card-content>
     </ion-card>
 
-    <button ion-item (click)="goToSchedule()" margin-top>Go to Schedule
-      <ion-icon item-end name="arrow-forward"></ion-icon>
+    <button ion-button outline color="uwi" (click)="goToSchedule()" margin-top>Go to Schedule
+      <ion-icon name="arrow-forward"></ion-icon>
     </button>
-    
-    
-  
-
   </ion-grid>
   
 </ion-content>

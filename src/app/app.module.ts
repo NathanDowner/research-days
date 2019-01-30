@@ -28,7 +28,7 @@ import { PostersProvider } from '../providers/posters/posters';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     NgQrScannerModule,
-    ZXingScannerModule,
+    // ZXingScannerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

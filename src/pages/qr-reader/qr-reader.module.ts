@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { QrReaderPage } from './qr-reader';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 
 @NgModule({
@@ -8,7 +9,8 @@ import { QrReaderPage } from './qr-reader';
     QrReaderPage
   ],
   imports: [
-    IonicPageModule.forChild(QrReaderPage)
+    IonicPageModule.forChild(QrReaderPage),
+    ZXingScannerModule
   ],
   exports: [
     QrReaderPage

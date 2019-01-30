@@ -1,6 +1,6 @@
 // Native Components
 import {Component, ViewChild} from "@angular/core";
-import {NavController} from "ionic-angular";
+import {NavController, IonicPage} from "ionic-angular";
 import { Platform } from "ionic-angular";
 
 //Providers
@@ -15,7 +15,7 @@ import {ZXingScannerComponent} from "@zxing/ngx-scanner";
 // InAppBrowser
 import {InAppBrowser, InAppBrowserObject} from "@ionic-native/in-app-browser";
 
-
+@IonicPage()
 @Component({
   selector: "page-qr-reader",
   templateUrl: "qr-reader.html"

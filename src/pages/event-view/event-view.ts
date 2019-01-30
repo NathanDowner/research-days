@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { Event } from '../../models/event';
 import { JamnavProvider } from '../../providers/jamnav/jamnav';
 import { Location } from '../../models/location';
 import { JamnavResponse } from '../../models/jamnavResponse';
 
+@IonicPage()
 @Component({
   selector: "page-event-view",
   templateUrl: "event-view.html"

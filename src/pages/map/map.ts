@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { Platform, ToastController, NavParams } from "ionic-angular";
+import { Platform, ToastController, NavParams, IonicPage } from "ionic-angular";
 
+@IonicPage()
 @Component({
   selector: "page-map",
   templateUrl: "map.html"

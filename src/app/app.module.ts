@@ -10,8 +10,7 @@ import { HomePage } from "../pages/home/home";
 import { MapPage } from "../pages/map/map";
 import { TabsPage } from "../pages/tabs/tabs";
 import { EventViewPage } from "../pages/event-view/event-view";
-import { QrscanPage } from "../pages/qrscan/qrscan";
-import { QrscanAngPage } from "../pages/qrscan-ang/qrscan-ang";
+
 
 //Other
 import { StatusBar } from "@ionic-native/status-bar";
@@ -35,8 +34,6 @@ import { PostersProvider } from '../providers/posters/posters';
     MapPage,
     QrReaderPage,
     HomePage,
-    QrscanPage,
-    QrscanAngPage,
     SchedulePage,
     TabsPage,
     EventViewPage
@@ -54,8 +51,6 @@ import { PostersProvider } from '../providers/posters/posters';
     MapPage,
     QrReaderPage,
     HomePage,
-    QrscanPage,
-    QrscanAngPage,
     SchedulePage,
     TabsPage,
     EventViewPage

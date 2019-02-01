@@ -75,12 +75,15 @@ export class SchedulePage {
   }
 
   isInField(field: any, value: string): boolean {
-    return (
-      field
-        .toString()
-        .toLowerCase()
-        .indexOf(value.toLowerCase()) > -1
-    );
+    if (field !== null) {
+      return (
+        field
+          .toString()
+          .toLowerCase()
+          .indexOf(value.toLowerCase()) > -1
+      );
+
+    }
   }
 
   isInEvent(event: Event, searchString: string): boolean {

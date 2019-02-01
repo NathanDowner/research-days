@@ -6,45 +6,51 @@ page-home {
       height: 68px;
     }
   }
-  ion-grid {
     // margin-top: 20vh;
 
-    .title {
-      color: $uwi-red;
-    }
-
-    ion-card .frame {
-      display: flex;
-      justify-content: center;
-    }
-    ion-card-header{ 
-      font-weight: 900;
-    }
-
-    iframe {
-      height: 200px;
-      width: 315px;
-    }
-
-    .social-media {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-
-      p {
-        color: $uwi-red;
-        text-decoration: none;
-        
-      }
-      
-    }
-
-    ion-icon {
-      font-size: 2.0em;
-      display: block;
-      color: $uwi-red;
-      
-    }
+  .title {
+    color: $uwi-red;
   }
+
+  ion-card .frame {
+    display: flex;
+    justify-content: center;
+  }
+  ion-card-header{ 
+    font-weight: 900;
+  }
+
+  iframe {
+    height: 200px;
+    width: 315px;
+  }
+
+  .social-media {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    p {
+      color: $uwi-red;
+      text-decoration: none;
+      
+    }
+    
+  }
+
+   ion-card-content ion-icon {
+    font-size: 2.0em;
+    display: block;
+    color: $uwi-red;
+    
+  }
+  
+  .fixed-content {
+    // margin-bottom: 0px !important;
+  }
+  .scroll-content {
+    margin-bottom: 0px !important;
+  }
+
   
 }

@@ -10,6 +10,7 @@ page-home {
 
   .title {
     color: $uwi-red;
+    margin-bottom: 26px;
   }
 
   ion-card .frame {
@@ -25,24 +26,8 @@ page-home {
     width: 315px;
   }
 
-  .social-media {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-
-    p {
-      color: $uwi-red;
-      text-decoration: none;
-      
-    }
-    
-  }
-
-   ion-card-content ion-icon {
-    font-size: 2.0em;
-    display: block;
-    color: $uwi-red;
-    
+  button#schedule {
+    margin-top: 26px;
   }
   
   .fixed-content {
@@ -51,6 +36,5 @@ page-home {
   .scroll-content {
     margin-bottom: 0px !important;
   }
-
   
 }

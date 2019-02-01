@@ -25,14 +25,21 @@
   <button  id="schedule"ion-button outline block color="uwi" (click)="goToSchedule()" margin-top>Go to Schedule
     <ion-icon name="arrow-forward"></ion-icon>
   </button>
-
+  <div id="fab">
+    
+  </div>
   <ion-fab right bottom>
-    <button ion-fab color="uwi"><ion-icon name="add"></ion-icon></button>
+    <div id="fab-text" #popup>
+      Follow us on Social Media!
+    </div>
+    <button ion-fab color="uwi"><ion-icon name="add" (click)="hidePopup()"></ion-icon></button>
     <ion-fab-list side="left">
       <button ion-fab color="uwi" (click)="openFb()"><ion-icon name="logo-facebook"></ion-icon></button>
       <button ion-fab color="uwi" (click)="openInsta()"><ion-icon name="logo-instagram"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
+
+  
   
 </ion-content>
 

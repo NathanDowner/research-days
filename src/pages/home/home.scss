@@ -29,6 +29,35 @@ page-home {
   button#schedule {
     margin-top: 26px;
   }
+
+  #fab-text {
+    position: absolute;
+    left: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid $uwi-red;
+    background: $uwi-red;
+    color: white;
+    padding: 4px 8px;
+    display: none;
+
+    &::after {
+      content:'';
+      display: block;
+      position: absolute;
+      transform: translateY(-50%) rotate(180deg);
+      right: -15px;
+      top: 50%;
+      
+      height: 0;
+      width: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 15px solid $uwi-red;
+    }
+  }
+
+  
   
   .fixed-content {
     // margin-bottom: 0px !important;

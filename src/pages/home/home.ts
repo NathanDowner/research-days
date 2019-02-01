@@ -12,7 +12,7 @@ export class HomePage {
 
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     setTimeout(() => {
       this.popup.nativeElement.style.display = 'block';
     }, 2000);

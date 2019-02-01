@@ -16,4 +16,13 @@ ion-label.small-item {
   font-size: 12px;
 }
 
+ion-thumbnail  {
+  border-radius: 8px;
+  border: 2px solid $uwi-red;
+  color: $uwi-red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 $checkbox-ios-icon-size: 16px;

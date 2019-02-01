@@ -71,9 +71,9 @@
         </ion-row>
       </ion-grid>
 
-      <ion-list-header> Faculty </ion-list-header>
+      <!-- <ion-list-header> Faculty </ion-list-header> -->
       <ion-item>
-        <ion-label>Choose one...</ion-label>
+        <ion-label>Faculty...</ion-label>
         <ion-select [(ngModel)]="refineSearchFilter.faculty">
           <ion-option value="Science & Technology"
             >Science & Technology</ion-option
@@ -87,9 +87,9 @@
         </ion-select>
       </ion-item>
 
-      <ion-list-header> Venue </ion-list-header>
+      <!-- <ion-list-header> Venue </ion-list-header> -->
       <ion-item>
-        <ion-label>Choose one...</ion-label>
+        <ion-label>Venue...</ion-label>
         <ion-select [(ngModel)]="refineSearchFilter.venue">
           <ion-option value="Assembly Hall">Assembly Hall</ion-option>
           <ion-option value="Tent">Tent</ion-option>
@@ -118,7 +118,8 @@
       margin-bottom
     >
       <ion-thumbnail item-start>
-        <ion-img [src]="event.imgSrc"></ion-img>
+        <div item-start class="date-img">{{ event.start_date | date:"MMM dd"}}</div>
+        <!-- <ion-img [src]="event.imgSrc"></ion-img> -->
       </ion-thumbnail>
       <h2>{{ event.title }}</h2>
       <p><ion-icon name="pin"></ion-icon> {{ event.venue }}</p>

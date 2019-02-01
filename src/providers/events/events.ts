@@ -7,8 +7,11 @@ import { Event } from "../../models/event";
 
 @Injectable()
 export class EventsProvider {
+  currentDate = new Date();
+  year = this.currentDate.getFullYear().toString();
+
   private eventsUrl =
-    "https://www.mona.uwi.edu/researchdays/api/views/schedule?display_id=services_1&limit=10&offset=0&filters[taxonomy_vocabulary_2_tid]=2018";
+    "https://www.mona.uwi.edu/researchdays/api/views/schedule?display_id=services_1&limit=0&offset=0&filters[taxonomy_vocabulary_2_tid]=" + this.year;
 
   constructor(private http: HttpClient) {}
 

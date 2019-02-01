@@ -6,45 +6,64 @@ page-home {
       height: 68px;
     }
   }
-  ion-grid {
     // margin-top: 20vh;
 
-    .title {
-      color: $uwi-red;
-    }
+  .title {
+    color: $uwi-red;
+    margin-bottom: 26px;
+  }
 
-    ion-card .frame {
-      display: flex;
-      justify-content: center;
-    }
-    ion-card-header{ 
-      font-weight: 900;
-    }
+  ion-card .frame {
+    display: flex;
+    justify-content: center;
+  }
+  ion-card-header{ 
+    font-weight: 900;
+  }
 
-    iframe {
-      height: 200px;
-      width: 315px;
-    }
+  iframe {
+    height: 200px;
+    width: 315px;
+  }
 
-    .social-media {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
+  button#schedule {
+    margin-top: 26px;
+  }
 
-      p {
-        color: $uwi-red;
-        text-decoration: none;
-        
-      }
-      
-    }
+  #fab-text {
+    position: absolute;
+    left: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid $uwi-red;
+    background: $uwi-red;
+    color: white;
+    padding: 4px 8px;
+    display: none;
 
-    ion-icon {
-      font-size: 2.0em;
+    &::after {
+      content:'';
       display: block;
-      color: $uwi-red;
+      position: absolute;
+      transform: translateY(-50%) rotate(180deg);
+      right: -15px;
+      top: 50%;
       
+      height: 0;
+      width: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 15px solid $uwi-red;
     }
+  }
+
+  
+  
+  .fixed-content {
+    // margin-bottom: 0px !important;
+  }
+  .scroll-content {
+    margin-bottom: 0px !important;
   }
   
 }

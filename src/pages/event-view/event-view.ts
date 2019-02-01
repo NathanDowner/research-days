@@ -26,11 +26,14 @@ export class EventViewPage {
   }
 
   makeApiCall(location: string) {
-    this.jamnav.getLocationData(location)
-      .subscribe(
-        (data: JamnavResponse) => this.location = data.features[0], 
-        error => console.log(`Error in receiving data: ${error}`)
-      );
+    if (location !== null) {
+      this.jamnav.getLocationData(location)
+        .subscribe(
+          (data: JamnavResponse) => this.location = data.features[0], 
+          error => console.log(`Error in receiving data: ${error}`)
+        );
+
+    }
   }
 
   findOnMap() {

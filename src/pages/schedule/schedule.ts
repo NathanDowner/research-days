@@ -82,8 +82,8 @@ export class SchedulePage {
           .toLowerCase()
           .indexOf(value.toLowerCase()) > -1
       );
-
-    }
+      }
+    
   }
 
   isInEvent(event: Event, searchString: string): boolean {

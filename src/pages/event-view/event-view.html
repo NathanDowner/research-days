@@ -21,6 +21,7 @@
     </ion-row>
 
     <h3 id="details">Details</h3>
-    <div [innerHTML]="event.details"></div>
+    <div *ngIf="event.details; else noDetails" [innerHTML]="event.details"></div>
+    <ng-template #noDetails>Details for this event have not been posted.</ng-template>
   </div>
 </ion-content>

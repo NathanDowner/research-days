@@ -1,19 +1,41 @@
-ion-toolbar.scrollable-segments {
-  overflow-x: scroll;
-  white-space: nowrap;
-  background: $uwi-red;
-}
+page-schedule {
 
-ion-toolbar button.date-filter {
-  margin: 0 4px;
-}
+  ion-content{
+    background: url("../../assets/imgs/bg-white3.jpg") no-repeat;
+    //background: linear-gradient(to bottom, #ff0000 0%, #ffffff 100%);
+    //background-size: cover;
+    position: relative;
+    padding: 0px;
 
-ion-toolbar ion-buttons button {
-  font-size: 8px;
-}
+    &::after{
+      content:'';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: rgba(255,255,255,0.3);
+      //background: rgba(255,0,0,0.1);
+      z-index: 0;
+    }
 
-ion-label.small-item {
-  font-size: 12px;
-}
+  }
 
-$checkbox-ios-icon-size: 16px;
+  ion-toolbar.scrollable-segments {
+    overflow-x: scroll;
+    white-space: nowrap;
+    background: $uwi-red;
+  }
+  
+  ion-toolbar button.date-filter {
+    margin: 0 4px;
+  }
+  
+  ion-toolbar ion-buttons button {
+    font-size: 8px;
+  }
+  
+  ion-label.small-item {
+    font-size: 12px;
+  }
+  
+  $checkbox-ios-icon-size: 16px;
+}

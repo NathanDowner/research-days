@@ -162,13 +162,6 @@ export class QrReaderPage {
   }
 
 
-  loadPosters(): void {
-    this.posters.getPostersHttp().subscribe(
-      (data) => { console.log(data) },
-      (err) => { console.log(err)},
-      () => { console.log("posters loaded w/ Http")}
-    );
-  }
 
 
   /** Unsub to all async processes */

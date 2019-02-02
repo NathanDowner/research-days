@@ -12,12 +12,10 @@ export class HomePage {
 
   }
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     setTimeout(() => {
       this.popup.nativeElement.style.display = 'block';
     }, 2000);
-
-    setTimeout(()=> this.hidePopup(), 5000);
   }
 
   hidePopup() {

@@ -26,11 +26,11 @@
   <div id="fab">
     
   </div>
-  <ion-fab right bottom>
+  <ion-fab right bottom >
     <div id="fab-text" #popup>
       Follow us on Social Media!
     </div>
-    <button ion-fab color="uwi"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="uwi" (click)="hidePopup()"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="left">
       <button ion-fab color="uwi" (click)="openFb()"><ion-icon name="logo-facebook"></ion-icon></button>
       <button ion-fab color="uwi" (click)="openInsta()"><ion-icon name="logo-instagram"></ion-icon></button>

@@ -20,14 +20,51 @@ page-qr-reader {
     .cameraView{
       background: transparent none !important;
     }
-  
-    /** style camera preview */
-    #scanner{
+
+    #overlay {
+      position: fixed; /* Sit on top of the page content */
+      display: block;
+      width: 100%; /* Full width (cover the whole page) */
+      height: 70%; /* Full height (cover the whole page) */
+      top: 20%;
+      bottom: 10%;
+      background: transparent none;
+      z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
+
+      svg {
+        height: 350px;
+        width: 100%;
+
+        line {
+          stroke: rgb(255, 0, 0);
+          stroke-width: 2;
+          animation-name: scan;
+          animation-duration: 2s;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+          animation-timing-function: linear;
+        }
+      }
     }
   }
-
-
-
-  
-
+  @keyframes scan {
+    0% {
+      transform: translateY(0)
+    }
+    20% {
+      transform: translateY(70px)
+    }
+    40% {
+      transform: translateY(140px)
+    }
+    60% {
+      transform: translateY(210px)
+    }
+    80% {
+      transform: translateY(280px)
+    }
+    100% {
+      transform: translateY(350px)
+    }
+  }
 }

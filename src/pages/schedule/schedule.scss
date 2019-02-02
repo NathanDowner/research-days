@@ -1,7 +1,10 @@
 page-schedule {
 
-  ion-content{
-    background: url("../../assets/imgs/bg-white3.jpg") no-repeat;
+  ion-content.has-refresher > .scroll-content {
+    background: transparent !important;
+  }
+  ion-list{
+    background: url("../../assets/imgs/bg-white3.jpg") fixed;
     //background: linear-gradient(to bottom, #ff0000 0%, #ffffff 100%);
     //background-size: cover;
     position: relative;
@@ -34,11 +37,6 @@ page-schedule {
       width: 50%;
     }
   }
-
-
-  // ion-item.item-checkbox {
-  //   padding-left: 0;
-  // }
 
   ion-checkbox.checkbox {
     margin-right: 10px !important;

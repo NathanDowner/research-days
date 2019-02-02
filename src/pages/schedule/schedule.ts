@@ -63,7 +63,6 @@ export class SchedulePage {
       for (let key in event) {
         if (event[key] !== null) {
           event[key] = decode(event[key]);
-
         }
       }
     });

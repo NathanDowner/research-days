@@ -1,9 +1,28 @@
 
 page-home {
+  ion-content{
+    background: url("../../assets/imgs/bg-white3.jpg") no-repeat;
+    //background: linear-gradient(to bottom, #ff0000 0%, #ffffff 100%);
+    //background-size: cover;
+    position: relative;
+    padding: 0px;
+
+    &::after{
+      content:'';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: rgba(255,255,255,0.3);
+      //background: rgba(255,0,0,0.1);
+      z-index: 0;
+    }
+
+  }
 
   ion-header {
     .header {
-      height: 68px;
+      height: 65px;
+      width: 100%;
     }
   }
     // margin-top: 20vh;

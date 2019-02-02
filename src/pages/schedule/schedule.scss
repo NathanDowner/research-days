@@ -23,16 +23,18 @@ page-schedule {
     border-radius: 8px;
     border: 2px solid $uwi-red;
     color:$uwi-red;
-    // background: $uwi-red;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .date-img {
+      font-family: 'Baloo Thambi', cursive;
+      font-weight: 900;
+      width: 50%;
+    }
   }
 
-  .date-img {
-    font-family: 'Baloo Thambi', cursive;
-    font-weight: 900;
-  }
 
   // ion-item.item-checkbox {
   //   padding-left: 0;

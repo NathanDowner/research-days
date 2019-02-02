@@ -180,7 +180,6 @@ export class QrReaderPage {
   /** TO BE performed after page loads */
   ionViewDidLoad(): void {
     console.log("IonViewDidLoad Qr Reader page");
-    this.loadPosters();
     this.setSize();
     this.prepare();
     this.checkPermission();

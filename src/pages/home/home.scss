@@ -22,7 +22,7 @@ page-home {
   ion-header {
     .header {
       height: 65px;
-      width: 100%;
+      // width: 100%;
     }
   }
     // margin-top: 20vh;
@@ -47,6 +47,10 @@ page-home {
 
   button#schedule {
     margin-top: 26px;
+
+    ion-icon {
+      margin-left: 20px;
+    }
   }
 
   #fab-text {

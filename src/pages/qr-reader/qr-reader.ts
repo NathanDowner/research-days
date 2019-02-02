@@ -1,6 +1,6 @@
 // Native Components
 import {Component, ViewChild} from "@angular/core";
-import {NavController} from "ionic-angular";
+import {NavController, ToastController, AlertController} from "ionic-angular";
 import { Platform } from "ionic-angular";
 
 //Providers
@@ -53,7 +53,7 @@ export class QrReaderPage {
    * @param platform
    * @constructor
    */
-  constructor(public navCtrl: NavController, private iab: InAppBrowser, private platform: Platform) {
+  constructor(public navCtrl: NavController, private iab: InAppBrowser, private platform: Platform, private alert: AlertController) {
     this.allowedFormats = [BarcodeFormat.QR_CODE];
     this.hasCameras = false;
     this.scannerEnabled = false;
@@ -176,6 +176,12 @@ export class QrReaderPage {
     this.setSize();
     this.prepare();
     this.checkPermission();
+    this.alert.create({
+      title: "Alert IOS users",
+      subTitle:"Due to contraints by Apple, our in-app scanner won't work on your device. Please use the one built into your camera app",
+      buttons: ['Ok'],
+    }).present();
+    
   }
 
 

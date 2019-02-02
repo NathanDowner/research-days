@@ -10,13 +10,16 @@
     <h3 class="event-title">{{ event.title }}</h3>
   </ion-row>
   <ion-row>
-    <span class="text-muted"> Time: {{ event.start_date }} </span>
+    <ion-col><strong>Time: </strong>{{ event.start_date | date: "MMM dd" }} @{{ event.start_date | date: "h:mm"}} </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col>Venue: {{ event.venue }}</ion-col>
+    <ion-col><strong>Venue: </strong>{{ event.venue }}</ion-col>
     <ion-col>
       <button ion-button outline round color="danger" (click)="findOnMap()" *ngIf="location">Locate</button>
     </ion-col>
+  </ion-row>
+  <ion-row *ngIf="event.faculty !== null">
+    <ion-col><strong>Faculty/Dept. : </strong>{{ event.faculty }}</ion-col>
   </ion-row>
 
   <h3 id="details">Details</h3>

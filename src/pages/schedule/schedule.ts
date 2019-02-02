@@ -1,16 +1,21 @@
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { NavController, Refresher } from "ionic-angular";
 import { EventsProvider } from "../../providers/events/events";
 import { EventViewPage } from "../event-view/event-view";
 import { Event } from "../../models/event";
+import {CacheService, Cache} from "ionic-cache-observable";
+import {Observable} from "rxjs";
 
 @Component({
   selector: "page-schedule",
   templateUrl: "schedule.html"
 })
 export class SchedulePage {
+  loadedEvents: Observable<Event[]>;
   events: Event[];
-  filteredEvents: Event[];
+  filteredEvents: Event[]
+
+  cache: Cache<Event[]>;
 
   refineSearchFilter: any = {
     dates: [],
@@ -27,18 +32,24 @@ export class SchedulePage {
     "All",
     "Today",
     "Tomorrow",
-    "2018-02-06",
-    "2018-02-07",
-    "2018-02-08"
+    "2019-02-06",
+    "2019-02-07",
+    "2019-02-08"
   ];
 
   constructor(
     private navCtrl: NavController,
-    private eventsProvider: EventsProvider
+    private eventsProvider: EventsProvider,
+    private cacheService: CacheService
   ) {}
 
   ionViewDidLoad() {
     this.getEvents();
+
+    this.loadedEvents.subscribe(events => {
+      this.events = events;
+      this.filteredEvents = events;
+    })
   }
 
   ionViewWillEnter() {
@@ -53,10 +64,26 @@ export class SchedulePage {
   }
 
   getEvents(): void {
-    this.eventsProvider.getEvents().subscribe((events: Event[]) => {
-      this.events = events;
-      this.filteredEvents = events;
-    });
+    const dataObservable$ = this.eventsProvider.getEvents();
+    this.cacheService.register("schedule", dataObservable$).subscribe(cache => {
+      this.loadedEvents = cache.get$;
+      this.cache = cache;
+    })
+  }
+
+  onRefresh(refresher: Refresher): void {
+    if (this.cache) {
+      this.cache.refresh().subscribe(
+        () => {
+          refresher.complete();
+        },
+        err => {
+          console.error("Refresh failed!", err);
+        }
+      );
+    } else {
+      refresher.cancel();
+    }
   }
 
   toggleIsSearching(): void {

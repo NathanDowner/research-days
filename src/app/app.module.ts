@@ -3,6 +3,9 @@ import { BrowserModule } from "@angular/platform-browser";
 import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
 import { MyApp } from "./app.component";
 
+import {CacheModule} from "ionic-cache-observable";
+import {IonicStorageModule} from "@ionic/storage";
+
 // Pages
 import { SchedulePage } from "../pages/schedule/schedule";
 import { QrReaderPage } from "../pages/qr-reader/qr-reader";
@@ -41,6 +44,8 @@ import { PostersProvider } from '../providers/posters/posters';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    CacheModule,
     HttpClientModule,
     NgQrScannerModule,
     ZXingScannerModule,

@@ -110,20 +110,29 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list [virtualScroll]="filteredEvents" approxItemHeight="100px">
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
     <ion-item
-      *virtualItem="let event"
+      *ngFor="let event of filteredEvents"
       (click)="showEventPage(event)"
       text-wrap
       margin-bottom
     >
       <ion-thumbnail item-start>
-        <div item-start class="date-img">{{ event.start_date | date:"MMM dd"}}</div>
+        <div item-start class="date-img">{{ event.start_date.split(" ")[0] | date:"MMM dd" }}</div>
         <!-- <ion-img [src]="event.imgSrc"></ion-img> -->
       </ion-thumbnail>
       <h2>{{ event.title }}</h2>
       <p><ion-icon name="pin"></ion-icon> {{ event.venue }}</p>
-      <p><ion-icon name="time"></ion-icon> {{ event.start_date | date:"MMM dd @hh:mm" }}</p>
+      <p><ion-icon name="sunny"></ion-icon> {{ event.start_date.split(" ")[0] | date:"MMM dd"}}</p>
+      <p><ion-icon name="time"></ion-icon> {{ event.time}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

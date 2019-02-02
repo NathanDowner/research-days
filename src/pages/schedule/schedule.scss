@@ -25,4 +25,12 @@ ion-thumbnail  {
   justify-content: center;
 }
 
+ion-item.item-checkbox {
+  // padding-left: 0;
+}
+
+ion-checkbox.checkbox {
+  margin-right: 10px !important;
+}
+
 $checkbox-ios-icon-size: 16px;

@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { Platform, ToastController, NavParams } from "ionic-angular";
+import { GeocodingProvider } from "../../providers/geocoding/geocoding";
+import { GeocodeResponse } from "../../models/geocodeResponse";
 
 @Component({
   selector: "page-map",
@@ -10,13 +12,15 @@ export class MapPage {
   search: string ="";
   map: google.maps.Map;
   mapCenter: google.maps.LatLng;
-  locationArr: google.maps.Marker[];
+  locationArr: google.maps.Marker[] =[];
+  resultsArr: google.maps.Marker[] =[];
   @ViewChild('map') mapRef: ElementRef;
 
   constructor(
     private plt: Platform, 
     private toast: ToastController, 
-    private navParams: NavParams) { 
+    private navParams: NavParams, 
+    private geocoder: GeocodingProvider) { 
       this.locationArr = [];
       this.mapCenter = new google.maps.LatLng(18.006168, -76.746955);
     }
@@ -34,7 +38,7 @@ export class MapPage {
 
     const options = {
       center: this.mapCenter,
-      zoom: 15,
+      zoom: 12,
       fullScreenControl: false
     };
 
@@ -79,6 +83,36 @@ export class MapPage {
       this.getPassedEvent()
     }
   
+  }
+
+  findLocation(searchTerm) {
+    this.clearResults();
+    if (searchTerm !== null && searchTerm !== "" ) {
+      this.geocoder.getLocation(searchTerm)
+        .subscribe(
+          (data: GeocodeResponse) => {
+            let coords = data.results[0].geometry.location;
+            let marker = this.addMarker(new google.maps.LatLng(parseFloat(coords.lat),parseFloat(coords.lng)),"Your Destination", "yes");
+            this.resultsArr.push(marker);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+
+    }
+  }
+
+  clearResults() {
+    if(this.resultsArr.length == 0) {
+      this.resultsArr = [];
+
+    } else {
+
+      this.resultsArr[0].setMap(null);
+      this.resultsArr = [];
+    
+    }
   }
 
   getPassedEvent() {

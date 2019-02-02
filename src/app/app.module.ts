@@ -25,11 +25,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { JamnavProvider } from '../providers/jamnav/jamnav';
 
 //plugins
-import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
+import { QRScanner } from "@ionic-native/qr-scanner";
 import { NgQrScannerModule } from "angular2-qrscanner";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
-import { PostersProvider } from '../providers/posters/posters';
 
 @NgModule({
   declarations: [
@@ -69,8 +68,7 @@ import { PostersProvider } from '../providers/posters/posters';
     EventsProvider,
     Geolocation,
     JamnavProvider,
-    InAppBrowser,
-    PostersProvider,
+    InAppBrowser
   ]
 
 })

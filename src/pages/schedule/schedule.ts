@@ -48,7 +48,9 @@ export class SchedulePage {
 
     this.loadedEvents.subscribe(events => {
       this.events = events;
+      this.events.forEach(e=>this.escapeChars(e));
       this.filteredEvents = events;
+      this.filteredEvents.forEach(e=>this.escapeChars(e));
     })
   }
 
@@ -61,6 +63,13 @@ export class SchedulePage {
     this.navCtrl.push(EventViewPage, {
       event: event
     });
+  }
+
+  escapeChars(event: Event) {
+    let parser = new DOMParser;
+    for(let key in event) {
+      event[key] = parser.parseFromString(event[key],'text/html');
+    }
   }
 
   getEvents(): void {

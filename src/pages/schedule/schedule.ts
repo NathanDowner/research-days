@@ -5,6 +5,7 @@ import { EventViewPage } from "../event-view/event-view";
 import { Event } from "../../models/event";
 import {CacheService, Cache} from "ionic-cache-observable";
 import {Observable} from "rxjs";
+import { decode } from "he";
 
 @Component({
   selector: "page-schedule",
@@ -47,14 +48,26 @@ export class SchedulePage {
     this.getEvents();
 
     this.loadedEvents.subscribe(events => {
-      this.events = events;
-      this.filteredEvents = events;
+      this.events = this.parseHTML(events);
+      this.filteredEvents = this.events;
     })
   }
 
   ionViewWillEnter() {
     this.isSearching = false;
     this.isFiltering = false;
+  }
+
+  parseHTML(events: Event[]): Event[] {
+    events.forEach(event => {
+      for (let key in event) {
+        if (event[key] !== null) {
+          event[key] = decode(event[key]);
+
+        }
+      }
+    });
+    return events;
   }
 
   showEventPage(event: Event) {

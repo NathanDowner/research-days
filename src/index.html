@@ -33,6 +33,11 @@
         .catch(err => console.error('Error', err));
     }
   </script>
+  <script>
+    window.onbeforeunload = () => {
+      return "Are you sure you want to leave the app?";
+  }
+</script>
 
   <link href="build/main.css" rel="stylesheet">
 

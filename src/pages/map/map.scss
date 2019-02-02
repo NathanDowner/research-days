@@ -2,4 +2,15 @@ page-map {
   #map_canvas {
     height: 100%;
   }
+
+  ion-toolbar {
+    position: absolute;
+  
+    ion-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
 }

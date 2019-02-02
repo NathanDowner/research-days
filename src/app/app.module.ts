@@ -29,6 +29,7 @@ import { QRScanner } from "@ionic-native/qr-scanner";
 import { NgQrScannerModule } from "angular2-qrscanner";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { GeocodingProvider } from '../providers/geocoding/geocoding';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
     EventsProvider,
     Geolocation,
     JamnavProvider,
-    InAppBrowser
+    InAppBrowser,
+    GeocodingProvider
   ]
 
 })

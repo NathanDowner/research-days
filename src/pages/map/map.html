@@ -3,5 +3,23 @@
 </ion-header>
 
 <ion-content>
+  <ion-toolbar>
+
+    <ion-row>
+
+      <ion-col col-9>
+        <ion-searchbar 
+          animated="true"
+          placeholder="Search"
+          [(ngModel)]="search">
+        </ion-searchbar>
+      </ion-col>
+
+      <ion-col col-3>
+        <button ion-button round color="light" (click)="findLocation(search)">Find</button>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
   <div #map id="map_canvas"></div>
 </ion-content>

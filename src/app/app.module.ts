@@ -3,6 +3,9 @@ import { BrowserModule } from "@angular/platform-browser";
 import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
 import { MyApp } from "./app.component";
 
+import {CacheModule} from "ionic-cache-observable";
+import {IonicStorageModule} from "@ionic/storage";
+
 // Pages
 import { SchedulePage } from "../pages/schedule/schedule";
 import { QrReaderPage } from "../pages/qr-reader/qr-reader";
@@ -22,11 +25,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { JamnavProvider } from '../providers/jamnav/jamnav';
 
 //plugins
-import { QRScanner, QRScannerStatus } from "@ionic-native/qr-scanner";
+import { QRScanner } from "@ionic-native/qr-scanner";
 import { NgQrScannerModule } from "angular2-qrscanner";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
-import { PostersProvider } from '../providers/posters/posters';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { PostersProvider } from '../providers/posters/posters';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    CacheModule,
     HttpClientModule,
     NgQrScannerModule,
     ZXingScannerModule,
@@ -64,8 +68,7 @@ import { PostersProvider } from '../providers/posters/posters';
     EventsProvider,
     Geolocation,
     JamnavProvider,
-    InAppBrowser,
-    PostersProvider,
+    InAppBrowser
   ]
 
 })

@@ -4,7 +4,7 @@ import {NavController} from "ionic-angular";
 import { Platform } from "ionic-angular";
 
 //Providers
-import { PostersProvider } from "../../providers/posters/posters";
+// import { PostersProvider } from "../../providers/posters/posters";
 
 //Barcode format
 import BarcodeFormat from "@zxing/library/esm5/core/BarcodeFormat";
@@ -53,7 +53,7 @@ export class QrReaderPage {
    * @param platform
    * @constructor
    */
-  constructor(public navCtrl: NavController, private iab: InAppBrowser, private posters: PostersProvider, private platform: Platform) {
+  constructor(public navCtrl: NavController, private iab: InAppBrowser, private platform: Platform) {
     this.allowedFormats = [BarcodeFormat.QR_CODE];
     this.hasCameras = false;
     this.scannerEnabled = false;
@@ -162,13 +162,6 @@ export class QrReaderPage {
   }
 
 
-  loadPosters(): void {
-    this.posters.getPostersHttp().subscribe(
-      (data) => { console.log(data) },
-      (err) => { console.log(err)},
-      () => { console.log("posters loaded w/ Http")}
-    );
-  }
 
 
   /** Unsub to all async processes */
@@ -180,7 +173,6 @@ export class QrReaderPage {
   /** TO BE performed after page loads */
   ionViewDidLoad(): void {
     console.log("IonViewDidLoad Qr Reader page");
-    this.loadPosters();
     this.setSize();
     this.prepare();
     this.checkPermission();

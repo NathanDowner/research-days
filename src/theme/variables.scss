@@ -32,13 +32,15 @@ $uwi-red: #ce1111;
 $uwi-white: #fff;
 
 $colors: (
-  primary: #488aff,
+  primary: #ce1111,
   secondary: #32db64,
   danger: #f53d3d,
   light: #f4f4f4,
   dark: #222,
   uwi: #ce1111
 );
+
+$toolbar-background: transparent;
 
 // App iOS Variables
 // --------------------------------------------------
@@ -80,3 +82,4 @@ $segment-button-wp-text-color-activated: $uwi-white;
 // --------------------------------------------------
 @import "roboto";
 @import "noto-sans";
+@import url('https://fonts.googleapis.com/css?family=Baloo+Thambi');

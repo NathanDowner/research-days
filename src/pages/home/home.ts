@@ -12,12 +12,10 @@ export class HomePage {
 
   }
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     setTimeout(() => {
       this.popup.nativeElement.style.display = 'block';
     }, 2000);
-
-    setTimeout(()=> this.hidePopup(), 5000);
   }
 
   hidePopup() {
@@ -30,11 +28,15 @@ export class HomePage {
   }
 
   openInsta() {
-    window.open('https://www.instagram.com', '_system');
+    window.open('https://www.instagram.com/UWIRESEARCHDAYS/', '_system');
   }
 
   openFb() {
-    window.open('https://www.facebook.com', '_system');
+    window.open('https://www.facebook.com/UWIMonaResearchDays/', '_system');
+  }
+  
+  openYoutube() {
+    window.open('https://www.youtube.com/channel/UCmmxtHS8__As0wUsA6c-E6g/featured', '_system');
   }
 }
 

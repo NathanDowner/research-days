@@ -7,6 +7,7 @@ import { Platform, ToastController, NavParams } from "ionic-angular";
 })
 export class MapPage {
 
+  search: string ="";
   map: google.maps.Map;
   mapCenter: google.maps.LatLng;
   locationArr: google.maps.Marker[];

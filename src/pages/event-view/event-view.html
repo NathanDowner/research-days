@@ -5,22 +5,21 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="image">
-    <img src="{{ event.imgSrc }}" alt="" />
-    <ion-row margin-top>
-      <h3 class="event-title">{{ event.title }}</h3>
-    </ion-row>
-    <ion-row>
-      <span class="text-muted"> Time: {{ event.start_date }} </span>
-    </ion-row>
-    <ion-row>
-      <ion-col>Venue: {{ event.venue }}</ion-col>
-      <ion-col>
-        <button ion-button outline round color="danger" (click)="findOnMap()" *ngIf="location">Locate</button>
-      </ion-col>
-    </ion-row>
+  <!-- <img src="{{ event.imgSrc }}" alt="" /> -->
+  <ion-row margin-top>
+    <h3 class="event-title">{{ event.title }}</h3>
+  </ion-row>
+  <ion-row>
+    <span class="text-muted"> Time: {{ event.start_date }} </span>
+  </ion-row>
+  <ion-row>
+    <ion-col>Venue: {{ event.venue }}</ion-col>
+    <ion-col>
+      <button ion-button outline round color="danger" (click)="findOnMap()" *ngIf="location">Locate</button>
+    </ion-col>
+  </ion-row>
 
-    <h3 id="details">Details</h3>
-    <div [innerHTML]="event.details"></div>
-  </div>
+  <h3 id="details">Details</h3>
+  <div *ngIf="event.details; else noDetails" [innerHTML]="event.details"></div>
+  <ng-template #noDetails>Details for this event have not been posted.</ng-template>
 </ion-content>

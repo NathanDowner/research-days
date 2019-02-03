@@ -36,13 +36,13 @@ export class MapPage {
 
   loadMap() {
 
-    const options = {
+    const ops: google.maps.MapOptions = {
       center: this.mapCenter,
       zoom: 15,
-      fullScreenControl: false
+      fullscreenControl: false
     };
 
-    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+    this.map = new google.maps.Map(this.mapRef.nativeElement, ops);
     this.addMarker(new google.maps.LatLng(18.006151, -76.747134), "Research Days Tent", "yes");
     
     if (navigator.geolocation) {

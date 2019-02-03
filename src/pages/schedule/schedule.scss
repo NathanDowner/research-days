@@ -1,5 +1,4 @@
 page-schedule {
-
   // ion-content.has-refresher > .scroll-content {
   //   background: transparent !important;
   // }
@@ -22,19 +21,21 @@ page-schedule {
 
   // }
 
-  ion-thumbnail  {
+  ion-thumbnail {
     border-radius: 8px;
     border: 2px solid $uwi-red;
-    color:$uwi-red;
+    color: $uwi-red;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     .date-img {
-      font-family: 'Baloo Thambi', cursive;
+      font-family: "Baloo Thambi", cursive;
       font-weight: 900;
-      width: 50%;
+      padding-left: 5px;
+      width: 50px;
+      height: 50px;
     }
   }
 
@@ -47,18 +48,22 @@ page-schedule {
     white-space: nowrap;
     background: $uwi-red;
   }
-  
+
   ion-toolbar button.date-filter {
     margin: 0 4px;
   }
-  
+
   ion-toolbar ion-buttons button {
     font-size: 8px;
   }
-  
+
   ion-label.small-item {
     font-size: 12px;
   }
-  
+
   $checkbox-ios-icon-size: 16px;
+}
+
+h3.help-text {
+  color: #ddd;
 }

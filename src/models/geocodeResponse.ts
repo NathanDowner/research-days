@@ -1,6 +1,6 @@
 export interface GeocodeResponse {
   results: [{
-    address_components: {}[];
+    address_components: [{}];
     formatted_address: string;
     geometry: {
       location: {
@@ -9,5 +9,6 @@ export interface GeocodeResponse {
       };
     };
 
-  }]
+  }],
+  status: string;
 }

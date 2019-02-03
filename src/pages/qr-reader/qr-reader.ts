@@ -53,7 +53,7 @@ export class QrReaderPage {
    * @param platform
    * @constructor
    */
-  constructor(public navCtrl: NavController, private iab: InAppBrowser, private platform: Platform) {
+  constructor(public navCtrl: NavController, private iab: InAppBrowser, private platform: Platform, private alert: AlertController) {
     this.allowedFormats = [BarcodeFormat.QR_CODE];
     this.hasCameras = false;
     this.scannerEnabled = false;
@@ -176,7 +176,16 @@ export class QrReaderPage {
     this.setSize();
     this.prepare();
     this.checkPermission();
+    this.showAlert();
     
+  }
+
+  showAlert() {
+    this.alert.create({
+      title: "Please Note!",
+      subTitle: "The QR Scanner may not work on IOS and older devices",
+      buttons: ['OK']
+    }).present();
   }
 
 

@@ -20,7 +20,6 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar
-    *ngIf="!isSearching && !isFiltering"
     class="scrollable-segments"
     no-border
     padding-horizontal
@@ -55,7 +54,6 @@
   <ion-toolbar color="light" *ngIf="isFiltering">
     <ion-list>
       <ion-list-header> Date </ion-list-header>
-
       <ion-grid>
         <ion-row>
           <ion-col col-4 *ngFor="let date of (dateFilters | slice: 3)">
@@ -71,30 +69,17 @@
         </ion-row>
       </ion-grid>
 
-      <!-- <ion-list-header> Faculty </ion-list-header> -->
       <ion-item>
         <ion-label>Faculty...</ion-label>
         <ion-select [(ngModel)]="refineSearchFilter.faculty">
-          <ion-option value="Science & Technology"
-            >Science & Technology</ion-option
-          >
-          <ion-option value="Social Sciences">Social Sciences</ion-option>
-          <ion-option value="Humanities & Education"
-            >Humanities & Education</ion-option
-          >
-          <ion-option value="Medical Sciences">Medical Sciences</ion-option>
-          <ion-option value="Engineering">Engineering</ion-option>
+          <ion-option *ngFor="let faculty of facultiesList" [value]="faculty">{{faculty}}</ion-option>
         </ion-select>
       </ion-item>
 
-      <!-- <ion-list-header> Venue </ion-list-header> -->
       <ion-item>
         <ion-label>Venue...</ion-label>
         <ion-select [(ngModel)]="refineSearchFilter.venue">
-          <ion-option value="Assembly Hall">Assembly Hall</ion-option>
-          <ion-option value="Tent">Tent</ion-option>
-          <ion-option value="Main Library">Main Library</ion-option>
-          <ion-option value="Undercroft">The Undercroft</ion-option>
+          <ion-option *ngFor="let venue of venuesList" [value]="venue">{{venue}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -118,6 +103,17 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
+  <div class="row" *ngIf="(filteredEvents === undefined || filteredEvents.length === 0) && eventsAreLoaded">
+    <div class="col col-center text-center">
+        <h3 
+        text-center 
+        class="help-text" 
+        >
+        No event(s) found for this search.
+      </h3>
+    </div>
+  </div>
+
   <ion-list>
     <ion-item
       *ngFor="let event of filteredEvents"
@@ -127,11 +123,9 @@
     >
       <ion-thumbnail item-start>
         <div item-start class="date-img">{{ event.start_date.split(" ")[0] | date:"MMM dd" }}</div>
-        <!-- <ion-img [src]="event.imgSrc"></ion-img> -->
       </ion-thumbnail>
       <h2>{{ event.title }}</h2>
       <p><ion-icon name="pin"></ion-icon> {{ event.venue }}</p>
-      <!-- <p><ion-icon name="sunny"></ion-icon> {{ event.start_date.split(" ")[0] | date:"MMM dd"}}</p> -->
       <p><ion-icon name="time"></ion-icon> {{ event.time}}</p>
     </ion-item>
   </ion-list>

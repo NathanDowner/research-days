@@ -3,8 +3,8 @@ import { NavController, Refresher } from "ionic-angular";
 import { EventsProvider } from "../../providers/events/events";
 import { EventViewPage } from "../event-view/event-view";
 import { Event } from "../../models/event";
-import {CacheService, Cache} from "ionic-cache-observable";
-import {Observable} from "rxjs";
+import { CacheService, Cache } from "ionic-cache-observable";
+import { Observable } from "rxjs";
 import { decode } from "he";
 
 @Component({
@@ -14,7 +14,10 @@ import { decode } from "he";
 export class SchedulePage {
   loadedEvents: Observable<Event[]>;
   events: Event[];
-  filteredEvents: Event[]
+  filteredEvents: Event[];
+
+  venuesList: any;
+  facultiesList: any;
 
   cache: Cache<Event[]>;
 
@@ -25,6 +28,7 @@ export class SchedulePage {
     venue: ""
   };
 
+  eventsAreLoaded: boolean = false;
   isSearching: boolean = false;
   isFiltering: boolean = false;
   searchTerm: string;
@@ -50,7 +54,12 @@ export class SchedulePage {
     this.loadedEvents.subscribe(events => {
       this.events = this.parseHTML(events);
       this.filteredEvents = this.events;
-    })
+      this.venuesList = this.getVenues(this.events);
+      this.facultiesList = this.getFaculites(this.events);
+    });
+
+    
+    this.eventsAreLoaded = true;
   }
 
   ionViewWillEnter() {
@@ -75,13 +84,20 @@ export class SchedulePage {
     });
   }
 
-
   getEvents(): void {
     const dataObservable$ = this.eventsProvider.getEvents();
     this.cacheService.register("schedule", dataObservable$).subscribe(cache => {
       this.loadedEvents = cache.get$;
       this.cache = cache;
-    })
+    });
+  }
+
+  getVenues(events: Event[]): void {
+    return this.getUniqueObjValues(events, "venue");
+  }
+
+  getFaculites(events: Event[]): void {
+    return this.getUniqueObjValues(events, "faculty");
   }
 
   onRefresh(refresher: Refresher): void {
@@ -122,8 +138,7 @@ export class SchedulePage {
           .toLowerCase()
           .indexOf(value.toLowerCase()) > -1
       );
-      }
-    
+    }
   }
 
   isInEvent(event: Event, searchString: string): boolean {
@@ -144,8 +159,6 @@ export class SchedulePage {
 
   updateFilterDates(date: string): void {
     const idx = this.refineSearchFilter.dates.indexOf(date);
-    console.log(date);
-    console.log(idx);
     if (idx === -1) {
       this.refineSearchFilter.dates.push(date);
     } else {
@@ -154,7 +167,7 @@ export class SchedulePage {
   }
 
   filterEvents(filterObject: any): void {
-    console.log(filterObject);
+    this.isFiltering = false;
     let refinedResults: Event[] = this.events;
 
     // filter for dates
@@ -216,6 +229,20 @@ export class SchedulePage {
     }
 
     this.filteredEvents = refinedResults;
+  }
+
+  private getUniqueObjValues(objArr: any, property: string) {
+    const vals: any = [];
+    objArr.forEach((obj: any) => {
+      if (
+        obj[property] !== null &&
+        !vals.includes(obj[property]) &&
+        obj[property].length !== 0
+      ) {
+        vals.push(obj[property]);
+      }
+    });
+    return vals;
   }
 
   private formatDate(date: string): string {

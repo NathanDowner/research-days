@@ -99,7 +99,7 @@ export class QrReaderPage {
       console.log(this.selectedDevice);
       console.log(devices);
       this.hasDevice();
-    });
+    }, () => { document.getElementById("overlay").style.visibility = "hidden";});
   }
 
   hasDevice(): void {
@@ -118,7 +118,7 @@ export class QrReaderPage {
       console.log("Permission: " + this.hasPermission);
       this.scannerEnabled = this.hasPermission;
       // this.restartScan();
-    });
+    }, () => { document.getElementById("overlay").style.visibility = "hidden";});
   }
 
 

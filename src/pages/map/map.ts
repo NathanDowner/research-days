@@ -22,7 +22,7 @@ export class MapPage {
     private navParams: NavParams, 
     private geocoder: GeocodingProvider) { 
       this.locationArr = [];
-      this.mapCenter = new google.maps.LatLng(18.006168, -76.746955);
+      this.mapCenter = new google.maps.LatLng(18.006151, -76.747134);
     }
 
   ionViewDidLoad() {
@@ -38,17 +38,18 @@ export class MapPage {
 
     const options = {
       center: this.mapCenter,
-      zoom: 12,
+      zoom: 15,
       fullScreenControl: false
     };
 
     this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+    this.addMarker(new google.maps.LatLng(18.006151, -76.747134), "Research Days Tent", "yes");
     
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         p => {
           this.map.panTo(new google.maps.LatLng(p.coords.latitude, p.coords.longitude));
-          this.map.setZoom(12);
+          this.map.setZoom(15);
 
         }
       );
@@ -91,9 +92,17 @@ export class MapPage {
       this.geocoder.getLocation(searchTerm)
         .subscribe(
           (data: GeocodeResponse) => {
-            let coords = data.results[0].geometry.location;
-            let marker = this.addMarker(new google.maps.LatLng(parseFloat(coords.lat),parseFloat(coords.lng)),"Your Destination", "yes");
-            this.resultsArr.push(marker);
+            if (data.status == "OK") {
+              let coords = data.results[0].geometry.location;
+              let marker = this.addMarker(new google.maps.LatLng(parseFloat(coords.lat),parseFloat(coords.lng)),"Your Destination", "yes");
+              this.resultsArr.push(marker);
+
+            } else {
+              this.toast.create({
+                message: "Could not find that location",
+                duration: 3000
+              }).present();
+            }
           },
           error => {
             console.log(error);
@@ -124,6 +133,7 @@ export class MapPage {
 
   addMarker(position: google.maps.LatLng, title: string, canAnimate?: string) {
     this.map.panTo(position);
+    this.map.setZoom(15);
     let marker = new google.maps.Marker({
       title: title,
       label: title,
@@ -132,6 +142,7 @@ export class MapPage {
     });
     if(canAnimate === "yes") {
       marker.setAnimation(google.maps.Animation.DROP);
+      
     }
     return marker;
   }

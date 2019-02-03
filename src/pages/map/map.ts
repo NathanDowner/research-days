@@ -67,7 +67,7 @@ export class MapPage {
           
           }
           let yourLoc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-          let marker = this.addMarker(yourLoc, "your location","noAnimation");
+          let marker = this.addMarkerWithoutPan(yourLoc, "your location","noAnimation");
           this.locationArr.push(marker);
         },
         err => {
@@ -130,10 +130,8 @@ export class MapPage {
       this.addMarker(new google.maps.LatLng(evInfo.lat, evInfo.lng),evInfo.title, "yes");
     }
   }
+  addMarkerWithoutPan(position: google.maps.LatLng, title: string, canAnimate: string) {
 
-  addMarker(position: google.maps.LatLng, title: string, canAnimate?: string) {
-    this.map.panTo(position);
-    this.map.setZoom(15);
     let marker = new google.maps.Marker({
       title: title,
       label: title,
@@ -142,9 +140,14 @@ export class MapPage {
     });
     if(canAnimate === "yes") {
       marker.setAnimation(google.maps.Animation.DROP);
-      
     }
     return marker;
+  }
+
+  addMarker(position: google.maps.LatLng, title: string, canAnimate?: string): google.maps.Marker {
+    this.map.panTo(position);
+    this.map.setZoom(16);
+    return this.addMarkerWithoutPan(position,title,canAnimate);
   }
 
 }

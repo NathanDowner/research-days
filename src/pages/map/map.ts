@@ -1,8 +1,13 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
+<<<<<<< HEAD
 import { Platform, ToastController, NavParams } from "ionic-angular";
 import { GeocodingProvider } from "../../providers/geocoding/geocoding";
 import { GeocodeResponse } from "../../models/geocodeResponse";
+=======
+import { Platform, ToastController, NavParams, IonicPage } from "ionic-angular";
+>>>>>>> taask/001-lazy-loaded-pages
 
+@IonicPage()
 @Component({
   selector: "page-map",
   templateUrl: "map.html"

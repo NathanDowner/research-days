@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, Refresher } from "ionic-angular";
+import { NavController, Refresher, IonicPage } from "ionic-angular";
 import { EventsProvider } from "../../providers/events/events";
 import { EventViewPage } from "../event-view/event-view";
 import { Event } from "../../models/event";
@@ -7,6 +7,7 @@ import { CacheService, Cache } from "ionic-cache-observable";
 import { Observable } from "rxjs";
 import { decode } from "he";
 
+@IonicPage()
 @Component({
   selector: "page-schedule",
   templateUrl: "schedule.html"
@@ -79,7 +80,7 @@ export class SchedulePage {
   }
 
   showEventPage(event: Event) {
-    this.navCtrl.push(EventViewPage, {
+    this.navCtrl.push("EventViewPage", {
       event: event
     });
   }

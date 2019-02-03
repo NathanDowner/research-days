@@ -3,18 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
 import { MyApp } from "./app.component";
 
-import {CacheModule} from "ionic-cache-observable";
-import {IonicStorageModule} from "@ionic/storage";
-
-// Pages
-import { SchedulePage } from "../pages/schedule/schedule";
-import { QrReaderPage } from "../pages/qr-reader/qr-reader";
-import { HomePage } from "../pages/home/home";
-import { MapPage } from "../pages/map/map";
-import { TabsPage } from "../pages/tabs/tabs";
-import { EventViewPage } from "../pages/event-view/event-view";
-
-
 //Other
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -30,16 +18,12 @@ import { NgQrScannerModule } from "angular2-qrscanner";
 import { ZXingScannerModule } from "@zxing/ngx-scanner";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { GeocodingProvider } from '../providers/geocoding/geocoding';
+import { IonicStorageModule } from "@ionic/storage";
+import { CacheModule } from "ionic-cache-observable";
 
 @NgModule({
   declarations: [
-    MyApp,
-    MapPage,
-    QrReaderPage,
-    HomePage,
-    SchedulePage,
-    TabsPage,
-    EventViewPage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -48,17 +32,11 @@ import { GeocodingProvider } from '../providers/geocoding/geocoding';
     CacheModule,
     HttpClientModule,
     NgQrScannerModule,
-    ZXingScannerModule,
+    // ZXingScannerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    MapPage,
-    QrReaderPage,
-    HomePage,
-    SchedulePage,
-    TabsPage,
-    EventViewPage
+    MyApp
   ],
   providers: [
     StatusBar,
